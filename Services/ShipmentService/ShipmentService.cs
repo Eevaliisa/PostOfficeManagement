@@ -29,5 +29,13 @@ namespace post_office_management.Services.ShipmentService
             return await _shipmentRepository.Add(newShipment);
         }
 
+        public async Task<Shipment> FinalizeShipment(string id)
+        {
+            Shipment shipment = await _shipmentRepository.GetShipmentById(id);
+            shipment.isFinalized = true;
+
+            return await _shipmentRepository.Update(shipment);
+        }
+
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using post_office_management.Repositories;
+using post_office_management.Repositories.ParcelRepository;
+using post_office_management.Services.ParcelService;
 using post_office_management.Services.ShipmentService;
 using post_office_management_app.Data;
 
@@ -30,8 +32,10 @@ namespace post_office_management
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IShipmentRepository, ShipmentRepository>(); 
+            services.AddTransient<IParcelRepository, ParcelRepository>();
 
             services.AddTransient<IShipmentService, ShipmentService>();
+            services.AddTransient<IParcelService, ParcelService>();
 
             services.AddControllersWithViews();
 
