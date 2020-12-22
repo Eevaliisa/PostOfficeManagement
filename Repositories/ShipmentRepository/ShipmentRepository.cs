@@ -10,12 +10,12 @@ namespace post_office_management.Repositories
     {
         public ShipmentRepository(DataContext context) : base(context) { }
 
-         public async Task<Shipment> GetShipmentByIdAsync(string id)
+         public async Task<Shipment> GetShipmentById(string id)
         {
             return await GetAll().FirstOrDefaultAsync(x => x.ShipmentId == id);
         }
 
-        public async Task<List<Shipment>> GetAllShipmentsAsync()
+        public async Task<List<Shipment>> GetAllShipments()
         {
             return await GetAll().ToListAsync();
         }

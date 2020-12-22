@@ -14,20 +14,20 @@ namespace post_office_management.Services.ShipmentService
             _shipmentRepository = shipmentRepository;
         }
 
-        public async Task<List<Shipment>> GetAllShipmentsAsync()
+        public async Task<List<Shipment>> GetAllShipments()
         {
-            return await _shipmentRepository.GetAllShipmentsAsync();
+            return await _shipmentRepository.GetAllShipments();
         }
 
-        public async Task<Shipment> GetShipmentByIdAsync(string id)
+        public async Task<Shipment> GetShipmentById(string id)
         {
-            return await _shipmentRepository.GetShipmentByIdAsync(id);
+            return await _shipmentRepository.GetShipmentById(id);
         }
 
-        public async Task<Shipment> AddShipmentAsync(Shipment newShipment)
+        public async Task<Shipment> AddShipment(Shipment newShipment)
         {
-            return await _shipmentRepository.AddAsync(newShipment);
+            return await _shipmentRepository.Add(newShipment);
         }
-    
+
     }
 }

@@ -7,8 +7,8 @@ namespace post_office_management.Repositories
     {
         IQueryable<TEntity> GetAll();
 
-        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> Add(TEntity entity);
 
-        Task<TEntity> UpdateAsync(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
     }
 }

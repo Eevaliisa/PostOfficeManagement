@@ -6,8 +6,8 @@ namespace post_office_management.Repositories
 {
     public interface IShipmentRepository: IRepository<Shipment>
     {
-        Task<Shipment> GetShipmentByIdAsync(string id);
+        Task<Shipment> GetShipmentById(string id);
 
-        Task<List<Shipment>> GetAllShipmentsAsync();
+        Task<List<Shipment>> GetAllShipments();
     }
 }

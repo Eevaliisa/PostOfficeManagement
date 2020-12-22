@@ -7,11 +7,12 @@ namespace post_office_management.Services.ShipmentService
 {
     public interface IShipmentService
     {
-        Task<List<Shipment>> GetAllShipmentsAsync();
+        Task<List<Shipment>> GetAllShipments();
         
-        Task<Shipment> GetShipmentByIdAsync(string id);
+        Task<Shipment> GetShipmentById(string id);
         
-        Task<Shipment> AddShipmentAsync(Shipment newShipment);
+        Task<Shipment> AddShipment(Shipment newShipment);
+
         
     }
 }

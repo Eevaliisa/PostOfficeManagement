@@ -26,11 +26,11 @@ namespace post_office_management.Repositories
             }
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public async Task<TEntity> Add(TEntity entity)
         {
             if (entity == null)
             {
-                throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
+                throw new ArgumentNullException($"{nameof(Add)} entity must not be null");
             }
 
             try
@@ -46,11 +46,11 @@ namespace post_office_management.Repositories
             }
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
             if (entity == null)
             {
-                throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
+                throw new ArgumentNullException($"{nameof(Add)} entity must not be null");
             }
 
             try
