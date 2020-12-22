@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using post_office_management.Repositories;
+using post_office_management.Services.ShipmentService;
 using post_office_management_app.Data;
 
 namespace post_office_management
@@ -25,6 +27,12 @@ namespace post_office_management
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IShipmentRepository, ShipmentRepository>(); 
+
+            services.AddTransient<IShipmentService, ShipmentService>();
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -48,7 +56,7 @@ namespace post_office_management
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
