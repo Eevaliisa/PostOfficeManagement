@@ -20,7 +20,7 @@ namespace post_office_management_app.Models
 
         [Required]
         [Column(TypeName = "decimal(18,3)")]
-        public decimal Weight { get; set; }
+        public decimal WeightInKg { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]

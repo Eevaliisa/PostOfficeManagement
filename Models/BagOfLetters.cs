@@ -21,6 +21,7 @@ namespace post_office_management_app.Models
         [Required]
         public int LettersCount { get; set; }
 
+        [Required]
         [RegularExpression(@"^[A-Z]{2}$")]
         public string DestinationCountryCode { get; set; }
         

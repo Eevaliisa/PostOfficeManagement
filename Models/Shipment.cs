@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace post_office_management_app.Models
 {
@@ -13,6 +15,7 @@ namespace post_office_management_app.Models
         public string ShipmentId { get; set; }
         
         [Required]
+        [JsonConverter(typeof(StringEnumConverter))]
         public Airport DestinationAirport { get; set; }
 
         [Required]
@@ -20,7 +23,7 @@ namespace post_office_management_app.Models
         public string FlightNumber { get; set; }
 
         [Required]
-        public DateTime? FlightDateTime { get; set; }
+        public DateTime FlightDateTime { get; set; }
 
         public List<BagOfParcels> ListOfParcelBags { get; set; } = new List<BagOfParcels>();
     

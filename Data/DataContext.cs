@@ -1,5 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using post_office_management_app.Models;
 
 namespace post_office_management_app.Data
@@ -18,9 +19,12 @@ namespace post_office_management_app.Data
             modelBuilder
                 .Entity<Shipment>()
                 .Property(e => e.DestinationAirport)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (Airport)Enum.Parse(typeof(Airport), v));
+                .HasConversion<string>();
+
+            modelBuilder
+                .Entity<Shipment>()
+                .Property(e => e.FlightDateTime)
+                .HasConversion<string>();
         }
     }
 }

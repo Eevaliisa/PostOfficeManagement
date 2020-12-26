@@ -6,6 +6,8 @@ using post_office_management_app.Models;
 
 namespace post_office_management.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ShipmentController: Controller
     {
         private readonly IShipmentService _shipmentService;

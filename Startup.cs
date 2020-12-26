@@ -28,7 +28,8 @@ namespace post_office_management
         {
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson();
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IShipmentRepository, ShipmentRepository>(); 
