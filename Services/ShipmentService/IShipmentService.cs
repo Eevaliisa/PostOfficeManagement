@@ -13,6 +13,6 @@ namespace post_office_management.Services.ShipmentService
         
         Task<Shipment> AddShipment(Shipment newShipment);
 
-        
+        Task<Shipment> FinalizeShipment(string id);
     }
 }

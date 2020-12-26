@@ -7,7 +7,7 @@ using post_office_management_app.Models;
 namespace post_office_management.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ShipmentController: Controller
     {
         private readonly IShipmentService _shipmentService;
@@ -16,10 +16,28 @@ namespace post_office_management.Controllers
             _shipmentService = shipmentService;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<ActionResult<List<Shipment>>> GetAllShipments()
         {
             return Ok(await _shipmentService.GetAllShipments());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Shipment>> GetShipmentById(string id)
+        {
+            var shipment = await _shipmentService.GetShipmentById(id);
+
+            if (shipment == null)
+            {
+                return NotFound();
+            }
+            return shipment;
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> FinalizeShipment(string id)
+        {
+            return Ok(await _shipmentService.FinalizeShipment(id));
         }
 
         [HttpPost]
