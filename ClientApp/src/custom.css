@@ -12,3 +12,35 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+#shipments-list-title {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    text-align: center;
+    font-family: arial, sans-serif;
+}
+
+#shipments-list {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+}
+
+#shipments-list td, #shipments-list {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#shipments-list tr:nth-child(even){background-color: #f2f2f2;}
+
+#shipments-list tr:hover {background-color: #ddd;}
+
+#shipments-list th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #1f3c88;
+  color: white;
+}
