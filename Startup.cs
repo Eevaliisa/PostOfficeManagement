@@ -7,7 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using post_office_management.Repositories;
+using post_office_management.Repositories.LetterBagRepository;
+using post_office_management.Repositories.ParcelBagRepository;
 using post_office_management.Repositories.ParcelRepository;
+using post_office_management.Services.LetterBagService;
+using post_office_management.Services.ParcelBagService;
 using post_office_management.Services.ParcelService;
 using post_office_management.Services.ShipmentService;
 using post_office_management_app.Data;
@@ -34,9 +38,13 @@ namespace post_office_management
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IShipmentRepository, ShipmentRepository>(); 
             services.AddTransient<IParcelRepository, ParcelRepository>();
+            services.AddTransient<IParcelBagRepository, ParcelBagRepository>();
+            services.AddTransient<ILetterBagRepository, LetterBagRepository>();
 
             services.AddTransient<IShipmentService, ShipmentService>();
             services.AddTransient<IParcelService, ParcelService>();
+            services.AddTransient<IParcelBagService, ParcelBagService>();
+            services.AddTransient<ILetterBagService, LetterBagService>();
 
             services.AddControllersWithViews();
 

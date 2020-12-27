@@ -14,8 +14,8 @@ namespace post_office_management.Repositories.LetterBagRepository
         public async Task<List<BagOfLetters>> GetAllLetterBagsByShipmentId(string id)
         {  
         return await _context.BagOfLetters
-            .Where(c => c.ShipmentId.ToLower()
-            .Equals(id.ToLower()))
+            .Where(c => c.ShipmentId.ToUpper()
+            .Equals(id.ToUpper()))
             .ToListAsync();
         }
     }
