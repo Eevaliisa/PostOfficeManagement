@@ -11,6 +11,7 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+  margin-bottom: 5%;
 }
 
 #shipments-list-title {
@@ -26,6 +27,7 @@ code {
   border-collapse: collapse;
   border: 3px solid #ddd;
   width: 100%;
+  margin-bottom: 5%;
 }
 
 #shipments-list td, #shipments-list {

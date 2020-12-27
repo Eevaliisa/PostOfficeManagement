@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { Shipment } from './components/Shipment';
-
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { ShipmentsList } from './components/ShipmentsList';
+import { AddShipment } from './components/AddShipment';
 
 import './custom.css'
 
@@ -15,9 +12,9 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={Shipment} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
+        <Route exact path='/' component={ShipmentsList} />
+        <Route path='/add-shipment' component={AddShipment} />
+      
       </Layout>
     );
   }

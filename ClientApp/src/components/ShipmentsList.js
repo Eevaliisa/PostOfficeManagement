@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class Shipment extends Component {
+export class ShipmentsList extends Component {
 
     constructor(props) {
         super(props);
@@ -16,13 +16,6 @@ export class Shipment extends Component {
         const shipments = await result.json();
         this.setState({ shipments, isFetching: false });
     }
-
-    // renderTableHeader() {
-    //     let header = Object.keys(this.state.shipments[0])
-    //     return header.map((key, index) => {
-    //        return <th key={index}>{key.toUpperCase()}</th>
-    //     })
-    //  }
 
     renderTableData() {
         return this.state.shipments.map((shipment, index) => {
@@ -48,23 +41,20 @@ export class Shipment extends Component {
                 <table id="shipments-list" className="table shipments-list">
                     <thead>
                         <tr>
-                        <th scope="col">Shipment Number</th>
+                        <th scope="col">Shipment ID</th>
                         <th scope="col">Destination Airport</th>
                         <th scope="col">Flight Number</th>
                         <th scope="col">Flight Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>{this.renderTableHeader()}</tr> */}
                         {this.renderTableData()}
                     </tbody>
                  </table>
             </div>
+
                 ); 
                 }
                 
-        
     }
-
-
 }
