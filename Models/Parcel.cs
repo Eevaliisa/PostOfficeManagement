@@ -26,6 +26,7 @@ namespace post_office_management_app.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
+        public string BagId { get; set; }
         public BagOfParcels BagOfParcels { get; set; } 
 
     }

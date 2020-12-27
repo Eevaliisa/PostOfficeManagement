@@ -25,6 +25,7 @@ namespace post_office_management_app.Models
         [RegularExpression(@"^[A-Z]{2}$")]
         public string DestinationCountryCode { get; set; }
         
+        public string ShipmentId { get; set; }
         public Shipment Shipment { get; set; }
     }
 }
