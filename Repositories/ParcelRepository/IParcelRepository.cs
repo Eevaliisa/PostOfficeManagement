@@ -9,6 +9,8 @@ namespace post_office_management.Repositories.ParcelRepository
          Task<Parcel> GetParcelById(string id);
 
          Task<List<Parcel>> GetAllParcels();
+
+         Task<Parcel> AddNewParcel(Parcel newParcel);
     
     }
 }

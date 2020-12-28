@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using post_office_management_app.Data;
@@ -18,6 +20,29 @@ namespace post_office_management.Repositories.ParcelRepository
         public async Task<Parcel> GetParcelById(string id)
         {
             return await GetAll().FirstOrDefaultAsync(x => x.ParcelId == id);
+        }
+
+        public async Task<Parcel> AddNewParcel(Parcel newParcel)
+        {
+            var newParcelBagId = newParcel.BagId;
+            var wrongBag = _context.BagOfLetters.Where(c => c.BagId.ToUpper().Equals(newParcelBagId.ToUpper()));
+            
+            if (wrongBag != null)
+            {
+                throw new ArgumentException($"Cannot add parcel to letterbag");
+            }
+            try
+            {
+                await _context.AddAsync(newParcel);
+                await _context.SaveChangesAsync();
+
+                return newParcel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(newParcel)} could not be saved: {ex.Message}");
+            }
+
         }
     }
 }

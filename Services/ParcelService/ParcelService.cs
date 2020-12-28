@@ -26,7 +26,7 @@ namespace post_office_management.Services.ParcelService
 
         public async Task<Parcel> AddParcel(Parcel newParcel)
         {
-            return await _parcelRepository.Add(newParcel);
+            return await _parcelRepository.AddNewParcel(newParcel);
         }
 
     }

@@ -13,6 +13,7 @@ namespace post_office_management.Services.ParcelBagService
         {
             _parcelBagRepository = parcelBagRepository;
         }
+        
         public async Task<List<BagOfParcels>> GetAllParcelBagsByShipmentId(string id)
         {
             return await _parcelBagRepository.GetAllParcelBagsByShipmentId(id);
@@ -26,6 +27,11 @@ namespace post_office_management.Services.ParcelBagService
         public async Task<BagOfParcels> UpdateParcelsListInBag(string id)
         {
             return await _parcelBagRepository.UpdateParcelsListInBag(id);
+        }
+
+        public async Task<BagOfParcels> AddBagOfParcels(BagOfParcels newBag)
+        {
+            return await _parcelBagRepository.Add(newBag);
         }
         
     }

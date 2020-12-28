@@ -7,11 +7,11 @@ namespace post_office_management.Services.ParcelBagService
     public interface IParcelBagService
     {
         Task<List<BagOfParcels>> GetAllParcelBagsByShipmentId(string id);
-        
 
         Task<List<Parcel>> GetAllParcelsInBag(string id);
-        
 
         Task<BagOfParcels> UpdateParcelsListInBag(string id);
+
+        Task<BagOfParcels> AddBagOfParcels(BagOfParcels newBag);
     }
 }

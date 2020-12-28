@@ -17,7 +17,8 @@ namespace post_office_management.Controllers
             _letterBagService = letterBagService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{shipmentId}/bagslist")]
         public async Task<ActionResult<List<BagOfLetters>>> GetAllLetterBagsByShipmentId(string id)
         {
            return Ok(await _letterBagService.GetAllLetterBagsByShipmentId(id));
@@ -28,5 +29,7 @@ namespace post_office_management.Controllers
         {
             return Ok(await _letterBagService.AddBagOfLetters(newBag));
         }
+
+
     }
 }

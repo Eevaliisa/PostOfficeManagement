@@ -15,7 +15,7 @@ namespace post_office_management_app.Models
         public string RecipientName {get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]{2}$")]
+        [RegularExpression(@"^[a-zA-Z]{2}$")]
         public string DestinationCountryCode { get; set; }
 
         [Required]
