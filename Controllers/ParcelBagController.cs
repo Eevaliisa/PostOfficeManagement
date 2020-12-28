@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using post_office_management.Services.ParcelBagService;
+using post_office_management.Validations;
 using post_office_management_app.Models;
 
 namespace post_office_management.Controllers
@@ -32,12 +33,14 @@ namespace post_office_management.Controllers
         }
 
         [HttpPost]
+        [ModelStateValidation]
         public async Task<ActionResult> AddBagOfParcels(BagOfParcels newBag)
         {
             return Ok(await _parcelBagService.AddBagOfParcels(newBag));
         }
 
         [HttpPut]
+        [ModelStateValidation]
         public async Task<ActionResult> UpdateParcelsListInBag(string id)
         {
             return Ok(await _parcelBagService.UpdateParcelsListInBag(id));

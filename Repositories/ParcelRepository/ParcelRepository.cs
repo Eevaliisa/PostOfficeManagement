@@ -25,12 +25,13 @@ namespace post_office_management.Repositories.ParcelRepository
         public async Task<Parcel> AddNewParcel(Parcel newParcel)
         {
             var newParcelBagId = newParcel.BagId;
-            var wrongBag = _context.BagOfLetters.Where(c => c.BagId.ToUpper().Equals(newParcelBagId.ToUpper()));
+            var wrongBag = _context.BagOfLetters.Where(c => c.BagId == newParcelBagId);
             
-            if (wrongBag != null)
+            if (wrongBag.Any())
             {
                 throw new ArgumentException($"Cannot add parcel to letterbag");
-            }
+                
+            } else {
             try
             {
                 await _context.AddAsync(newParcel);
@@ -41,6 +42,7 @@ namespace post_office_management.Repositories.ParcelRepository
             catch (Exception ex)
             {
                 throw new Exception($"{nameof(newParcel)} could not be saved: {ex.Message}");
+            }
             }
 
         }

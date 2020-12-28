@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using post_office_management.Services.ShipmentService;
+using post_office_management.Validations;
 using post_office_management_app.Models;
 
 namespace post_office_management.Controllers
@@ -35,12 +36,14 @@ namespace post_office_management.Controllers
         }
 
         [HttpPut]
+        [ModelStateValidation]
         public async Task<ActionResult> FinalizeShipment(string id)
         {
             return Ok(await _shipmentService.FinalizeShipment(id));
         }
 
         [HttpPost]
+        [ModelStateValidation]
         public async Task<ActionResult> AddShipment(Shipment newShipment)
         {
             return Ok(await _shipmentService.AddShipment(newShipment));
