@@ -19,15 +19,15 @@ namespace post_office_management_app.Models
         public string DestinationCountryCode { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,3)")]
+        [Column(TypeName = "decimal(5,3)")]
         public decimal WeightInKg { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        public string BagId { get; set; }
-        public BagOfParcels BagOfParcels { get; set; } 
+        [ForeignKey("BagOfParcels")]
+        public string BagId { get; set; } 
 
     }
 }

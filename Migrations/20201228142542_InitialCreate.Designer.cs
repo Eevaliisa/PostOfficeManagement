@@ -9,8 +9,8 @@ using post_office_management_app.Data;
 namespace post_office_management.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201226100622_AddShipmentDateTimeToStringConverter")]
-    partial class AddShipmentDateTimeToStringConverter
+    [Migration("20201228142542_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,8 @@ namespace post_office_management.Migrations
             modelBuilder.Entity("post_office_management_app.Models.BagOfLetters", b =>
                 {
                     b.Property<string>("BagId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("DestinationCountryCode")
                         .IsRequired()
@@ -51,7 +52,8 @@ namespace post_office_management.Migrations
             modelBuilder.Entity("post_office_management_app.Models.BagOfParcels", b =>
                 {
                     b.Property<string>("BagId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("DestinationCountryCode")
                         .IsRequired()
@@ -72,8 +74,11 @@ namespace post_office_management.Migrations
                     b.Property<string>("ParcelId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("BagId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BagOfParcelsBagId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("DestinationCountryCode")
                         .IsRequired()
@@ -88,7 +93,7 @@ namespace post_office_management.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("WeightInKg")
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(5,3)");
 
                     b.HasKey("ParcelId");
 
@@ -142,11 +147,9 @@ namespace post_office_management.Migrations
 
             modelBuilder.Entity("post_office_management_app.Models.Parcel", b =>
                 {
-                    b.HasOne("post_office_management_app.Models.BagOfParcels", "BagOfParcels")
+                    b.HasOne("post_office_management_app.Models.BagOfParcels", null)
                         .WithMany("ListOfParcels")
                         .HasForeignKey("BagOfParcelsBagId");
-
-                    b.Navigation("BagOfParcels");
                 });
 
             modelBuilder.Entity("post_office_management_app.Models.BagOfParcels", b =>

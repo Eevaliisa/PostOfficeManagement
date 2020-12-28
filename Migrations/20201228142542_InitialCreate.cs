@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace post_office_management.Migrations
 {
@@ -14,7 +13,7 @@ namespace post_office_management.Migrations
                     ShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DestinationAirport = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FlightNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FlightDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FlightDateTime = table.Column<string>(type: "nvarchar(48)", nullable: false),
                     isFinalized = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -26,11 +25,11 @@ namespace post_office_management.Migrations
                 name: "BagOfLetters",
                 columns: table => new
                 {
-                    BagId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BagId = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     TotalWeight = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     LettersCount = table.Column<int>(type: "int", nullable: false),
-                    DestinationCountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DestinationCountryCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -48,7 +47,7 @@ namespace post_office_management.Migrations
                 name: "BagOfParcels",
                 columns: table => new
                 {
-                    BagId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BagId = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     DestinationCountryCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -70,9 +69,10 @@ namespace post_office_management.Migrations
                     ParcelId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RecipientName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DestinationCountryCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Weight = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
+                    WeightInKg = table.Column<decimal>(type: "decimal(5,3)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BagOfParcelsBagId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    BagId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BagOfParcelsBagId = table.Column<string>(type: "nvarchar(15)", nullable: true)
                 },
                 constraints: table =>
                 {
