@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,10 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog;
+using post_office_management.Exceptions;
+using post_office_management.Logger;
 using post_office_management.Repositories;
 using post_office_management.Repositories.LetterBagRepository;
 using post_office_management.Repositories.ParcelBagRepository;
 using post_office_management.Repositories.ParcelRepository;
+using post_office_management.Services;
 using post_office_management.Services.LetterBagService;
 using post_office_management.Services.ParcelBagService;
 using post_office_management.Services.ParcelService;
@@ -22,6 +29,7 @@ namespace post_office_management
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -32,6 +40,7 @@ namespace post_office_management
         {
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.ConfigureLoggerService();
             services.AddControllers()
                     .AddNewtonsoftJson();
 
@@ -56,7 +65,7 @@ namespace post_office_management
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +73,8 @@ namespace post_office_management
             }
             else
             {
+                app.ConfigureExceptionHandler(logger);
+                
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
