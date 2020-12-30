@@ -17,11 +17,15 @@ export class ShipmentsList extends Component {
         this.setState({ shipments, isFetching: false });
     }
 
+    handleClick(id){
+        console.log(id);
+     }
+
     renderTableData() {
         return this.state.shipments.map((shipment, index) => {
             const {shipmentId, destinationAirport, flightNumber, flightDateTime } = shipment
             return (
-                <tr key={shipmentId}>
+                <tr key={shipmentId} id={shipmentId} onClick={() => this.handleClick(shipmentId)}>
                     <td>{shipmentId}</td>
                     <td>{destinationAirport}</td>
                     <td>{flightNumber}</td>
@@ -37,8 +41,8 @@ export class ShipmentsList extends Component {
          } else {
             return(
             <div>
-                <h1 id="shipments-list-title">Shipments</h1>
-                <table id="shipments-list" className="table shipments-list">
+                <h1 id="list-title">Shipments</h1>
+                <table id="data-list" className="table data-list">
                     <thead>
                         <tr>
                         <th scope="col">Shipment ID</th>

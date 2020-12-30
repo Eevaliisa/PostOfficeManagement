@@ -35,7 +35,7 @@ export class AddShipment extends Component {
                 'Content-Type': 'application/json'
               },
             body: JSON.stringify(this.state)
-          }).then(function(response) {
+          }).then((response) => {
             console.log(response)
             return response.json();
           });
