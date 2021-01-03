@@ -33,7 +33,6 @@ namespace post_office_management.Repositories
             await _context.SaveChangesAsync();
 
             return entity;
-           
         }
     }
 }

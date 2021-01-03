@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import { GetLetterBagList } from './components/GetLetterBagList';
 
 export class ShipmentsList extends Component {
 
@@ -6,8 +7,11 @@ export class ShipmentsList extends Component {
         super(props);
         this.state = {
             isFetching: false,
+            //showLetterBags: false,
+            shipmentId: '',
             shipments: []
-        };    
+        };   
+        this.handleClick = this.handleClick.bind(this); 
     }
 
     async componentDidMount() {
@@ -18,6 +22,8 @@ export class ShipmentsList extends Component {
     }
 
     handleClick(id){
+        this.setState({ shipmentId: id });
+        window.location.href = "/get-bags-list";
         console.log(id);
      }
 
@@ -53,6 +59,7 @@ export class ShipmentsList extends Component {
                     </thead>
                     <tbody>
                         {this.renderTableData()}
+
                     </tbody>
                  </table>
             </div>
