@@ -16,54 +16,24 @@ namespace post_office_management.Repositories
 
         public IQueryable<TEntity> GetAll()
         {
-            try
-            {
-                return _context.Set<TEntity>();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Couldn't retrieve entities: {ex.Message}");
-            }
+            return _context.Set<TEntity>();
         }
 
         public async Task<TEntity> Add(TEntity entity)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException($"{nameof(Add)} entity must not be null");
-            }
+            await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
-            try
-            {
-                await _context.AddAsync(entity);
-                await _context.SaveChangesAsync();
-
-                return entity;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{nameof(entity)} could not be saved: {ex.Message}");
-            }
+             return entity;
         }
 
         public async Task<TEntity> Update(TEntity entity)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException($"{nameof(Add)} entity must not be null");
-            }
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
 
-            try
-            {
-                _context.Update(entity);
-                await _context.SaveChangesAsync();
-
-                return entity;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{nameof(entity)} could not be updated: {ex.Message}");
-            }
+            return entity;
+           
         }
     }
 }
