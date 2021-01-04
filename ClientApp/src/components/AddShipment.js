@@ -27,7 +27,7 @@ export class AddShipment extends Component {
     render() {
         return (
             <div>
-                <h2>Add New Shipment</h2>
+                <h2 className="list-title">Add New Shipment</h2>
 
                 <Formik
                     initialValues={{shipmentId: "", destinationAirport: "", flightNumber: "", flightDateTime: ""}}

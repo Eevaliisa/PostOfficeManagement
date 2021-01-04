@@ -19,14 +19,14 @@ namespace post_office_management.Controllers
         }
 
         [HttpGet]
-        [Route("{shipmentId}/bagslist")]
+        [Route("{id}/bagList")]
         public async Task<ActionResult<List<BagOfParcels>>> GetAllParcelBagsByShipmentId(string id)
         {
            return Ok(await _parcelBagService.GetAllParcelBagsByShipmentId(id));
         }
 
         [HttpGet]
-        [Route("{bagId}/parcels")]
+        [Route("{id}/parcels")]
         public async Task<ActionResult<List<Parcel>>> GetAllParcelsInBag(string id)
         {
             return Ok(await _parcelBagService.GetAllParcelsInBag(id));

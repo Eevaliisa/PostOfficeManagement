@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { GetLetterBagList } from './components/GetLetterBagList';
 
 export class ShipmentsList extends Component {
 
@@ -7,7 +6,6 @@ export class ShipmentsList extends Component {
         super(props);
         this.state = {
             isFetching: false,
-            //showLetterBags: false,
             shipmentId: '',
             shipments: []
         };   
@@ -30,13 +28,14 @@ export class ShipmentsList extends Component {
 
     renderTableData() {
         return this.state.shipments.map((shipment, index) => {
-            const {shipmentId, destinationAirport, flightNumber, flightDateTime } = shipment
+            const {shipmentId, destinationAirport, flightNumber, flightDateTime, isFinalized } = shipment
             return (
                 <tr key={shipmentId} id={shipmentId} onClick={() => this.handleClick(shipmentId)}>
                     <td>{shipmentId}</td>
                     <td>{destinationAirport}</td>
                     <td>{flightNumber}</td>
                     <td>{flightDateTime}</td>
+                    <td>{String(isFinalized)}</td>
                 </tr>
             )
         })
@@ -48,14 +47,15 @@ export class ShipmentsList extends Component {
          } else {
             return(
             <div>
-                <h1 id="list-title">Shipments</h1>
+                <h1 className="list-title">Shipments</h1>
                 <table id="data-list" className="table data-list">
                     <thead>
                         <tr>
-                        <th scope="col">Shipment ID</th>
-                        <th scope="col">Destination Airport</th>
-                        <th scope="col">Flight Number</th>
-                        <th scope="col">Flight Date</th>
+                            <th scope="col">Shipment ID</th>
+                            <th scope="col">Destination Airport</th>
+                            <th scope="col">Flight Number</th>
+                            <th scope="col">Flight Date</th>
+                            <th scope="col">Finalized</th>
                         </tr>
                     </thead>
                     <tbody>
