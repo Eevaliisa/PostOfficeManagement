@@ -1,57 +1,29 @@
 import React, { Component } from 'react';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from "yup";
 
 const AddShipmentSchema = Yup.object().shape({
 
     shipmentId: Yup.string()
-        .matches(/^[0-9a-zA-Z]{3}\-[0-9a-zA-Z]{6}$/,
-            "Incorrect format. Please use format XXX-XXXXXX")
-        .required("Shipment Id is required"),    
+        .matches(/^[0-9a-zA-Z]{3}-[0-9a-zA-Z]{6}$/,
+            "Incorrect format. Please use format XXX-XXXXXX where X is a letter or a number.")
+        .required("Shipment Id is required"),
+    destinationAirport: Yup.string()  
+        .matches(/^[a-zA-Z]{3}$/,
+            "Incorrect format, please use one of possible values: TLL, RIX or HEL.")    
+        .required("Destination airport is required."),
+    flightNumber: Yup.string()
+        .matches(/^[a-zA-Z]{2}[0-9]{4}$/,
+            "Incorrect format, pleas use format LLNNNN where L - letter and N - number.")
+        .required("Flight number is required."),
+    flightDateTime: Yup.string()
+        .matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$/,
+        "Incorrect format, please use following format: yyyy-mm-dd hh:mm:ss")
+        .required("Flight date is required.")
 });
 
 export class AddShipment extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-            
-    //         shipmentId: "",
-    //         destinationAirport: "",
-    //         flightNumber: "",
-    //         flightDateTime: "",
-
-    //     };    
-        //this.handleInputChange = this.handleInputChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
-    // }
-
-    // handleInputChange = (event) => {
-    //     const target = event.target;
-    //     const value = target.value;
-    //     const name = target.name;
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
-
-    // handleSubmit = (event) => {
-    //     event.preventDefault();
-        
-    //     fetch('http://localhost:5000/api/shipment', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //           },
-    //         body: JSON.stringify(this.state)
-    //       }).then((response) => {
-    //         console.log(response)
-    //         return response.json();
-    //       });
-    //     console.log(this.state);   
-    // }
-
+    
     render() {
         return (
             <div>
@@ -61,7 +33,6 @@ export class AddShipment extends Component {
                     initialValues={{shipmentId: "", destinationAirport: "", flightNumber: "", flightDateTime: ""}}
                     validationSchema={AddShipmentSchema}
                     onSubmit={(values, { setSubmitting }) => {
-                        console.log('submitting')
                         fetch('http://localhost:5000/api/shipment', {
                             method: 'POST',
                             headers: {
@@ -73,9 +44,7 @@ export class AddShipment extends Component {
                                 console.log(response)
                                 return response.json();
                             });
-                            console.log(this.state);
-                            console.log('submitted')
-
+                        
                      setSubmitting(false);
                     }}
                 >
@@ -86,9 +55,12 @@ export class AddShipment extends Component {
                         <Field name="shipmentId" 
                             className="form-control" 
                             placeholder="Use following the format: XXX-XXXXXX"/>
-                            {errors.shipmentId && touched.shipmentId ? (
-                            <div>{errors.shipmentId}</div>
-                            ) : null}
+                            { errors.shipmentId && touched.shipmentId }
+                        <ErrorMessage
+                            component="div"
+                            name="shipmentId"
+                            className="text-danger"
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="destinationAirport">Destination Airport</label>
@@ -98,6 +70,12 @@ export class AddShipment extends Component {
                             className="form-control" 
                             id="destinationAirport" 
                             placeholder="possible values are TLL, RIX or HEL"/>
+                            { errors.destinationAirport && touched.destinationAirport }
+                        <ErrorMessage
+                            component="div"
+                            name="destinationAirport"
+                            className="text-danger"
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="flightNumber">Flight Number</label>
@@ -107,6 +85,12 @@ export class AddShipment extends Component {
                             className="form-control" 
                             id="flightNumber" 
                             placeholder="Use format LLNNNN where L - letter, N - number"/>
+                            { errors.flightNumber && touched.flightNumber }
+                        <ErrorMessage
+                            component="div"
+                            name="flightNumber"
+                            className="text-danger"
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="flightDateTime">Flight Date</label>
@@ -115,7 +99,13 @@ export class AddShipment extends Component {
                             name="flightDateTime" 
                             className="form-control" 
                             id="flightDateTime" 
-                            placeholder="Use format YYYY-MM-DD"/>
+                            placeholder="Use format YYYY-MM-DD hh:mm:ss"/>
+                            { errors.flightDateTime && touched.flightDateTime }
+                        <ErrorMessage
+                            component="div"
+                            name="flightDateTime"
+                            className="text-danger"
+                        />
                     </div>
                     <button className="btn btn-primary" type="submit">Add Shipment</button>
                     </Form>
