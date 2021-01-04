@@ -20,5 +20,13 @@ namespace post_office_management.Repositories
             return await GetAll().ToListAsync();
         }
         
+        public override async Task<Shipment> Add(Shipment shipment){
+            var result = _context.Set<Shipment>()
+                .AddIfNotExists<Shipment>(shipment , x => x.ShipmentId == shipment.ShipmentId);
+            await _context.SaveChangesAsync();
+
+            return result?.Entity;
+        }
+        
     }
 }

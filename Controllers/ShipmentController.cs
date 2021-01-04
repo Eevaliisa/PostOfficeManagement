@@ -51,7 +51,9 @@ namespace post_office_management.Controllers
         [ModelStateValidation]
         public async Task<ActionResult> AddShipment(Shipment newShipment)
         {
-            return Ok(await _shipmentService.AddShipment(newShipment));
+            var result = await _shipmentService.AddShipment(newShipment);
+            
+            return result == null ? Conflict("Shipment with given ID already exists in database") : Ok("New shipment added");
         }
     }
 }

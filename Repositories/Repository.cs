@@ -19,7 +19,7 @@ namespace post_office_management.Repositories
             return _context.Set<TEntity>();
         }
 
-        public async Task<TEntity> Add(TEntity entity)
+        public virtual async Task<TEntity> Add(TEntity entity)
         {
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
