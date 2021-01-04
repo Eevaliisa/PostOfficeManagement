@@ -15,7 +15,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={ShipmentsList} />
         <Route path='/add-shipment' component={AddShipment} />
-        {/* <Route path='/get-bags-list' component={GetLetterBagList}/> */}
+        <Route path='/get-bags-list' component={GetLetterBagList}/>
       </Layout>
     );
   }
