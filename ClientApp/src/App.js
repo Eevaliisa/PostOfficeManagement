@@ -3,9 +3,10 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { ShipmentsList } from './components/ShipmentsList';
 import { AddShipment } from './components/AddShipment';
-
-import './custom.css'
 import { GetBagList } from './components/GetBagList';
+import { GetParcelsList } from "./components/GetParcelsList";
+import './custom.css'
+
 
 export default class App extends Component {
   static displayName = App.name;
@@ -15,7 +16,8 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={ShipmentsList} />
         <Route path='/add-shipment' component={AddShipment} />
-        <Route path='/get-bags-list' component={GetBagList}/>
+        <Route path='/bags-list' component={GetBagList}/>
+        <Route path='/parcels-list' component={GetParcelsList}/>
       </Layout>
     );
   }

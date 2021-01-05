@@ -8,8 +8,9 @@ export class GetBagList extends Component {
             isFetching: false,
             shipmentId: new URLSearchParams(window.location.search).get('id'),
             letterBags: [],
-            parcelBags: []
-        };    
+            parcelBags: [],
+        };
+        this.handleClick = this.handleClick.bind(this);
     }
     
     async getAllLetterBags() {
@@ -27,13 +28,19 @@ export class GetBagList extends Component {
         this.setState({ parcelBags, isFetching: false });
         console.log(result);
     }
-
+    
     async componentDidMount() {
         await this.getAllLetterBags();
         await this.getAllParcelBags();
     }
 
-    renderTableData() {
+    handleClick(id){
+        this.setState({ bagId: id });
+        window.location.href = `/parcels-list?id=${id}`;
+        console.log(id);
+    }
+
+    renderLetterBagTableData() {
         return this.state.letterBags.map((letterBag) => {
             const {bagId, totalPrice, lettersCount, destinationCountryCode, shipmentId } = letterBag
             return (
@@ -50,16 +57,16 @@ export class GetBagList extends Component {
         })
     }
     
-    renderParcelTableData() {
+    renderParcelBagTableData() {
         return this.state.parcelBags.map((parcelBag) => {
-            const {bagId, destinationCountryCode, shipmentId } = parcelBag
+            const {bagId, listOfParcels, destinationCountryCode, shipmentId } = parcelBag
             return (
-                <tr key={bagId}>
+                <tr key={bagId} id={bagId} onClick={() => this.handleClick(bagId)}>
                     <td>{bagId}</td>
                     <td>Bag of Parcels</td>
                     <td>0</td>
                     <td>0</td>
-                    <td>0</td>
+                    <td>{listOfParcels}</td>
                     <td>{destinationCountryCode}</td>
                     <td>{shipmentId}</td>
                 </tr>
@@ -87,8 +94,8 @@ export class GetBagList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderTableData()}
-                        {this.renderParcelTableData()}
+                        {this.renderLetterBagTableData()}
+                        {this.renderParcelBagTableData()}
                     </tbody>
                  </table>
             </div>

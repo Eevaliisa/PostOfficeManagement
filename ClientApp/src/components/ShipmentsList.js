@@ -21,10 +21,9 @@ export class ShipmentsList extends Component {
 
     handleClick(id){
         this.setState({ shipmentId: id });
-        window.location.href = `/get-bags-list?id=${id}`;
+        window.location.href = `/bags-list?id=${id}`;
         console.log(id);
-
-     }
+    }
 
     renderTableData() {
         return this.state.shipments.map((shipment, index) => {
@@ -60,7 +59,6 @@ export class ShipmentsList extends Component {
                     </thead>
                     <tbody>
                         {this.renderTableData()}
-
                     </tbody>
                  </table>
             </div>
