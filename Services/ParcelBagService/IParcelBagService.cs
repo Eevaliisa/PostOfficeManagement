@@ -8,8 +8,6 @@ namespace post_office_management.Services.ParcelBagService
     {
         Task<List<BagOfParcels>> GetAllParcelBagsByShipmentId(string id);
 
-        Task<List<Parcel>> GetAllParcelsInBag(string id);
-
         Task<BagOfParcels> UpdateParcelsListInBag(string id);
 
         Task<BagOfParcels> AddBagOfParcels(BagOfParcels newBag);

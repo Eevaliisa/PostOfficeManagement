@@ -21,6 +21,13 @@ namespace post_office_management.Repositories.ParcelRepository
         {
             return await GetAll().FirstOrDefaultAsync(x => x.ParcelId == id);
         }
+        
+        public async Task<List<Parcel>> GetAllParcelsByBagId(string id)
+        {
+            return await _context.Parcels
+                .Where(c => c.BagId.ToUpper().Equals(id.ToUpper()))
+                .ToListAsync();
+        }
 
         public async Task<Parcel> AddNewParcel(Parcel newParcel)
         {

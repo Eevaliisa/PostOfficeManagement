@@ -25,13 +25,6 @@ namespace post_office_management.Controllers
            return Ok(await _parcelBagService.GetAllParcelBagsByShipmentId(id));
         }
 
-        [HttpGet]
-        [Route("{id}/parcels")]
-        public async Task<ActionResult<List<Parcel>>> GetAllParcelsInBag(string id)
-        {
-            return Ok(await _parcelBagService.GetAllParcelsInBag(id));
-        }
-
         [HttpPost]
         [ModelStateValidation]
         public async Task<ActionResult> AddBagOfParcels(BagOfParcels newBag)

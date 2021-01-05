@@ -8,7 +8,9 @@ namespace post_office_management.Services.ParcelService
     {
          Task<List<Parcel>> GetAllParcels();
 
-         Task<Parcel> GetParceltById(string id);
+         Task<Parcel> GetParcelById(string id);
+
+         Task<List<Parcel>> GetParcelsByBagId(string id);
 
          Task<Parcel> AddParcel(Parcel newParcel);
     }

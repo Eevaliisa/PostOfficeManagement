@@ -27,13 +27,20 @@ namespace post_office_management.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Parcel>> GetParcelById(string id)
     {
-        var parcel = await _parcelService.GetParceltById(id);
+        var parcel = await _parcelService.GetParcelById(id);
 
         if (parcel == null)
         {
              return NotFound();
         }
         return parcel;
+    }
+    
+    [HttpGet]
+    [Route("{id}/parcels")]
+    public async Task<ActionResult<List<Parcel>>> GetAllParcelsByBagId(string id)
+    {
+        return Ok(await _parcelService.GetParcelsByBagId(id));
     }
 
     [HttpPost]

@@ -19,9 +19,14 @@ namespace post_office_management.Services.ParcelService
             return await _parcelRepository.GetAllParcels();
         }
 
-        public async Task<Parcel> GetParceltById(string id)
+        public async Task<Parcel> GetParcelById(string id)
         {
             return await _parcelRepository.GetParcelById(id);
+        }
+
+        public async Task<List<Parcel>> GetParcelsByBagId(string id)
+        {
+            return await _parcelRepository.GetAllParcelsByBagId(id);
         }
 
         public async Task<Parcel> AddParcel(Parcel newParcel)

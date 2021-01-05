@@ -17,13 +17,6 @@ namespace post_office_management.Repositories.ParcelBagRepository
             .ToListAsync();
         }
 
-        public async Task<List<Parcel>> GetAllParcelsInBag(string id)
-        {
-            var parcelBag = await GetAll().FirstOrDefaultAsync(x => x.BagId == id);
-            
-            return parcelBag.ListOfParcels;
-        }
-
         public async Task<BagOfParcels> UpdateParcelsListInBag(string id)
         {
             var bagToUpdate =  _context.BagOfParcels
@@ -31,13 +24,16 @@ namespace post_office_management.Repositories.ParcelBagRepository
             .Include(c => c.ListOfParcels)
             .FirstOrDefault();
 
-            bagToUpdate.ListOfParcels =  _context.Parcels.Where(c => c.BagId == id).ToList();
-            _context.Entry(bagToUpdate).State = EntityState.Modified;
+            if (bagToUpdate != null)
+            {
+                bagToUpdate.ListOfParcels = _context.Parcels.Where(c => c.BagId == id).ToList();
+                _context.Entry(bagToUpdate).State = EntityState.Modified;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            return bagToUpdate;
-            
+                return bagToUpdate;
+            }
+            return null;
         }
 
     }
