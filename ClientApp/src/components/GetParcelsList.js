@@ -13,6 +13,14 @@ export class GetParcelsList extends Component {
         };
     }
     
+    getTotalPriceOfParcels() {
+        let total = 0;
+        for (let i=0; i < this.state.parcelsList.length; i++) {
+            total = total + this.state.parcelsList[i].price;
+        }
+        return total;
+    }
+    
     async componentDidMount() {
         console.log(this.state.bagId)
         const result = await fetch(`http://localhost:5000/api/parcel/${this.state.bagId}/parcels`);
@@ -64,6 +72,14 @@ export class GetParcelsList extends Component {
                         </thead>
                         <tbody>
                         {this.renderParcelTableData()}
+                        <tr>
+                            <th scope="col">Total number of parcels:</th>
+                            <th scope="col">{ this.state.parcelsList.length }</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Total price: </th>
+                            <th scope="col">{ this.getTotalPriceOfParcels() }</th>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

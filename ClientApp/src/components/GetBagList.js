@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import {Button} from "reactstrap";
 
 export class GetBagList extends Component {
 
@@ -11,7 +12,7 @@ export class GetBagList extends Component {
             letterBags: [],
             parcelBags: [],
         };
-        this.handleClick = this.handleClick.bind(this);
+        this.handleParcelBagClick = this.handleParcelBagClick.bind(this);
     }
     
     async getAllLetterBags() {
@@ -35,11 +36,12 @@ export class GetBagList extends Component {
         await this.getAllParcelBags();
     }
 
-    handleClick(id){
+    handleParcelBagClick(id){
         this.setState({ bagId: id });
         window.location.href = `/parcels-list?id=${id}`;
         console.log(id);
     }
+    
 
     renderLetterBagTableData() {
         return this.state.letterBags.map((letterBag) => {
@@ -50,7 +52,6 @@ export class GetBagList extends Component {
                     <td>Bag of Letters</td>
                     <td>{totalPrice}</td>
                     <td>{lettersCount}</td>
-                    <td>0</td>
                     <td>{destinationCountryCode}</td>
                     <td>{shipmentId}</td>
                 </tr>
@@ -62,12 +63,11 @@ export class GetBagList extends Component {
         return this.state.parcelBags.map((parcelBag) => {
             const {bagId, listOfParcels, destinationCountryCode, shipmentId } = parcelBag
             return (
-                <tr key={bagId} id={bagId} onClick={() => this.handleClick(bagId)}>
+                <tr key={bagId} id={bagId} onClick={() => this.handleParcelBagClick(bagId)}>
                     <td>{bagId}</td>
                     <td>Bag of Parcels</td>
+                    <td>Click to see list of parcels</td>
                     <td>0</td>
-                    <td>0</td>
-                    <td>{listOfParcels}</td>
                     <td>{destinationCountryCode}</td>
                     <td>{shipmentId}</td>
                 </tr>
@@ -84,8 +84,11 @@ export class GetBagList extends Component {
                 <h2 className="list-title">
                     <Link to="/" className="btn btn-secondary float-left">Back</Link>
                     Bags in shipment no {this.state.shipmentId}
-                    <Link to="" className="btn btn-danger float-right">Add New Bag</Link>
                 </h2>
+                <div className="align-content-center">
+                <Link to="" className="btn btn-danger">Add New Bag of Letters</Link>
+                <Link to="" className="btn btn-danger float-right">Add New Bag of Parcels</Link>
+                </div>
                 <table className="table data-list">
                     <thead>
                         <tr>
@@ -93,7 +96,6 @@ export class GetBagList extends Component {
                             <th scope="col">Type of Bag</th>
                             <th scope="col">Total Price</th>
                             <th scope="col">Letters Count</th>
-                            <th scope="col">Parcels Count</th>
                             <th scope="col">Destination Country Code</th>
                             <th scope="col">Shipment ID</th>
                         </tr>
@@ -103,6 +105,7 @@ export class GetBagList extends Component {
                         {this.renderParcelBagTableData()}
                     </tbody>
                  </table>
+                <Button className="btn btn-primary btn-lg">Finalize Shipment</Button>
             </div>
 
             ); 
