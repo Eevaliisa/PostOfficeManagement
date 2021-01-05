@@ -20,6 +20,10 @@ code {
   border-color: #ee6f57;
 }
 
+.btn-danger:hover {
+  background-color: #eb593d;
+}
+
 .list-title {
     margin-top: 5%;
     margin-bottom: 2%;

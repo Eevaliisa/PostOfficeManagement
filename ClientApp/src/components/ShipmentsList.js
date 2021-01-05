@@ -48,7 +48,7 @@ export class ShipmentsList extends Component {
             return(
             <div>
                 <h1 className="list-title">Shipments
-                    <Link to="/add-shipment" className="btn btn-primary btn-lg float-right" type="button">Add new shipment</Link>
+                    <Link to="/add-shipment" className="btn btn-danger btn-lg float-right" type="button">Add new shipment</Link>
                 </h1>
                 <table id="data-list" className="table data-list">
                     <thead>

@@ -43,9 +43,9 @@ export class GetParcelsList extends Component {
             return(
                 <div>
                     <h2 className="list-title">
-                        <Link to="/" className="btn btn-danger float-left">Back</Link>
+                        <Link to="/" className="btn btn-secondary float-left">Back</Link>
                         Parcels in bag no {this.state.bagId}
-                        <Link to="" className="btn btn-primary float-right">Add New Parcel</Link>
+                        <Link to="" className="btn btn-danger float-right">Add New Parcel</Link>
                     </h2>
                     <table className="table data-list">
                         <thead>
