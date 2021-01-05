@@ -14,6 +14,12 @@ code {
   margin-bottom: 5%;
 }
 
+.btn-danger {
+  color: #fff;
+  background-color: #ee6f57;
+  border-color: #ee6f57;
+}
+
 .list-title {
     margin-top: 5%;
     margin-bottom: 2%;

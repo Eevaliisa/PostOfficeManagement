@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 export class GetBagList extends Component {
 
@@ -80,7 +81,11 @@ export class GetBagList extends Component {
          } else {
             return(
             <div>
-                <h2 className="list-title">Bags in shipment no {this.state.shipmentId}</h2>
+                <h2 className="list-title">
+                    <Link to="/" className="btn btn-danger float-left">Back</Link>
+                    Bags in shipment no {this.state.shipmentId}
+                    <Link to="" className="btn btn-primary float-right">Add New Bag</Link>
+                </h2>
                 <table className="table data-list">
                     <thead>
                         <tr>

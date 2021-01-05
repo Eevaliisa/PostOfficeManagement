@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from "yup";
+import {Link} from "react-router-dom";
 
 const AddShipmentSchema = Yup.object().shape({
 
@@ -27,7 +28,9 @@ export class AddShipment extends Component {
     render() {
         return (
             <div>
-                <h2 className="list-title">Add New Shipment</h2>
+                <h2 className="list-title">
+                    <Link to="/" className="btn btn-danger float-left">Back</Link>
+                    Add New Shipment</h2>
 
                 <Formik
                     initialValues={{shipmentId: "", destinationAirport: "", flightNumber: "", flightDateTime: ""}}
@@ -107,7 +110,7 @@ export class AddShipment extends Component {
                             className="text-danger"
                         />
                     </div>
-                    <button className="btn btn-primary" type="submit">Add Shipment</button>
+                    <button className="btn btn-primary" type="submit">Save</button>
                     </Form>
                     )}
                 </Formik>

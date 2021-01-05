@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 export class ShipmentsList extends Component {
 
@@ -46,7 +47,9 @@ export class ShipmentsList extends Component {
          } else {
             return(
             <div>
-                <h1 className="list-title">Shipments</h1>
+                <h1 className="list-title">Shipments
+                    <Link to="/add-shipment" className="btn btn-primary btn-lg float-right" type="button">Add new shipment</Link>
+                </h1>
                 <table id="data-list" className="table data-list">
                     <thead>
                         <tr>
