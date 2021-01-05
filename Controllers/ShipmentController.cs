@@ -40,7 +40,7 @@ namespace post_office_management.Controllers
             return shipment;
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [ModelStateValidation]
         public async Task<ActionResult> FinalizeShipment(string id)
         {

@@ -8,11 +8,13 @@ export class GetBagList extends Component {
         super(props);
         this.state = {
             isFetching: false,
+            isFinalized: false,
             shipmentId: new URLSearchParams(window.location.search).get('id'),
             letterBags: [],
             parcelBags: [],
         };
         this.handleParcelBagClick = this.handleParcelBagClick.bind(this);
+        this.handleFinalizeClick = this.handleFinalizeClick.bind(this);
     }
     
     async getAllLetterBags() {
@@ -40,6 +42,21 @@ export class GetBagList extends Component {
         this.setState({ bagId: id });
         window.location.href = `/parcels-list?id=${id}`;
         console.log(id);
+    }
+    
+    handleFinalizeClick() {
+        console.log(this.state.shipmentId)
+        fetch(`http://localhost:5000/api/shipment/${this.state.shipmentId}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then((response) => {
+            console.log(response)
+            return response.json()
+        });
+        this.setState({ isFinalized: true});
     }
     
 
@@ -86,8 +103,8 @@ export class GetBagList extends Component {
                     Bags in shipment no {this.state.shipmentId}
                 </h2>
                 <div className="align-content-center">
-                <Link to="" className="btn btn-danger">Add New Bag of Letters</Link>
-                <Link to="" className="btn btn-danger float-right">Add New Bag of Parcels</Link>
+                <Link to="" disabled={ this.state.isFinalized } className="btn btn-danger">Add New Bag of Letters</Link>
+                <Link to="" disabled={ this.state.isFinalized } className="btn btn-danger float-right">Add New Bag of Parcels</Link>
                 </div>
                 <table className="table data-list">
                     <thead>
@@ -105,7 +122,9 @@ export class GetBagList extends Component {
                         {this.renderParcelBagTableData()}
                     </tbody>
                  </table>
-                <Button className="btn btn-primary btn-lg">Finalize Shipment</Button>
+                <Button className="btn btn-primary btn-lg" 
+                        onClick={this.handleFinalizeClick}
+                        disabled={this.state.isFinalized}>Finalize Shipment</Button>
             </div>
 
             ); 

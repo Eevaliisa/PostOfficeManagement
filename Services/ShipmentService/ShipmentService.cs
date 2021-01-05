@@ -31,7 +31,7 @@ namespace post_office_management.Services.ShipmentService
 
         public async Task<Shipment> FinalizeShipment(string id)
         {
-            Shipment shipment = await _shipmentRepository.GetShipmentById(id);
+            var shipment = await _shipmentRepository.GetShipmentById(id);
             shipment.isFinalized = true;
 
             return await _shipmentRepository.Update(shipment);
