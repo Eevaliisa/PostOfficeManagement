@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import {Button} from "reactstrap";
 
 export class GetParcelsList extends Component {
 
@@ -18,6 +19,9 @@ export class GetParcelsList extends Component {
         const parcelsList = await result.json();
         this.setState({ parcelsList, isFetching:false });
         console.log(result);
+    }
+    handleClick(){
+        window.location.href = `/add-parcel?id=${this.state.bagId}`;
     }
 
     renderParcelTableData() {
@@ -45,7 +49,7 @@ export class GetParcelsList extends Component {
                     <h2 className="list-title">
                         <Link to="/" className="btn btn-secondary float-left">Back</Link>
                         Parcels in bag no {this.state.bagId}
-                        <Link to="" className="btn btn-danger float-right">Add New Parcel</Link>
+                        <Button className="btn btn-danger float-right" onClick={() => this.handleClick()}>Add New Parcel</Button>
                     </h2>
                     <table className="table data-list">
                         <thead>

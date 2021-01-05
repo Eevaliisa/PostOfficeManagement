@@ -6,6 +6,7 @@ import { AddShipment } from './components/AddShipment';
 import { GetBagList } from './components/GetBagList';
 import { GetParcelsList } from "./components/GetParcelsList";
 import './custom.css'
+import {AddParcel} from "./components/AddParcel";
 
 
 export default class App extends Component {
@@ -18,6 +19,7 @@ export default class App extends Component {
         <Route path='/add-shipment' component={AddShipment} />
         <Route path='/bags-list' component={GetBagList}/>
         <Route path='/parcels-list' component={GetParcelsList}/>
+        <Route path='/add-parcel' component={AddParcel}/>
       </Layout>
     );
   }

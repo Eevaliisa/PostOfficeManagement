@@ -29,11 +29,15 @@ export class AddShipment extends Component {
         return (
             <div>
                 <h2 className="list-title">
-                    <Link to="/" className="btn btn-danger float-left">Back</Link>
+                    <Link to="/" className="btn btn-secondary float-left">Back</Link>
                     Add New Shipment</h2>
 
                 <Formik
-                    initialValues={{shipmentId: "", destinationAirport: "", flightNumber: "", flightDateTime: ""}}
+                    initialValues={{
+                        shipmentId: "", 
+                        destinationAirport: "", 
+                        flightNumber: "", 
+                        flightDateTime: ""}}
                     validationSchema={AddShipmentSchema}
                     onSubmit={(values, { setSubmitting }) => {
                         fetch('http://localhost:5000/api/shipment', {
@@ -53,64 +57,64 @@ export class AddShipment extends Component {
                 >
                 {({ errors, touched }) => (
                     <Form>
-                    <div className="form-group">
-                        <label htmlFor="shipmentId">Shipment ID</label>
-                        <Field name="shipmentId" 
-                            className="form-control" 
-                            placeholder="Use following the format: XXX-XXXXXX"/>
-                            { errors.shipmentId && touched.shipmentId }
-                        <ErrorMessage
-                            component="div"
-                            name="shipmentId"
-                            className="text-danger"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="destinationAirport">Destination Airport</label>
-                        <Field 
-                            type="text" 
-                            name="destinationAirport" 
-                            className="form-control" 
-                            id="destinationAirport" 
-                            placeholder="possible values are TLL, RIX or HEL"/>
-                            { errors.destinationAirport && touched.destinationAirport }
-                        <ErrorMessage
-                            component="div"
-                            name="destinationAirport"
-                            className="text-danger"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="flightNumber">Flight Number</label>
-                        <Field
-                            type="text" 
-                            name="flightNumber" 
-                            className="form-control" 
-                            id="flightNumber" 
-                            placeholder="Use format LLNNNN where L - letter, N - number"/>
-                            { errors.flightNumber && touched.flightNumber }
-                        <ErrorMessage
-                            component="div"
-                            name="flightNumber"
-                            className="text-danger"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="flightDateTime">Flight Date</label>
-                        <Field 
-                            type="text" 
-                            name="flightDateTime" 
-                            className="form-control" 
-                            id="flightDateTime" 
-                            placeholder="Use format YYYY-MM-DD hh:mm:ss"/>
-                            { errors.flightDateTime && touched.flightDateTime }
-                        <ErrorMessage
-                            component="div"
-                            name="flightDateTime"
-                            className="text-danger"
-                        />
-                    </div>
-                    <button className="btn btn-primary" type="submit">Save</button>
+                        <div className="form-group">
+                            <label htmlFor="shipmentId">Shipment ID</label>
+                            <Field name="shipmentId" 
+                                className="form-control" 
+                                placeholder="Use following the format: XXX-XXXXXX"/>
+                                { errors.shipmentId && touched.shipmentId }
+                            <ErrorMessage
+                                component="div"
+                                name="shipmentId"
+                                className="text-danger"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="destinationAirport">Destination Airport</label>
+                            <Field 
+                                type="text" 
+                                name="destinationAirport" 
+                                className="form-control" 
+                                id="destinationAirport" 
+                                placeholder="possible values are TLL, RIX or HEL"/>
+                                { errors.destinationAirport && touched.destinationAirport }
+                            <ErrorMessage
+                                component="div"
+                                name="destinationAirport"
+                                className="text-danger"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="flightNumber">Flight Number</label>
+                            <Field
+                                type="text" 
+                                name="flightNumber" 
+                                className="form-control" 
+                                id="flightNumber" 
+                                placeholder="Use format LLNNNN where L - letter, N - number"/>
+                                { errors.flightNumber && touched.flightNumber }
+                            <ErrorMessage
+                                component="div"
+                                name="flightNumber"
+                                className="text-danger"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="flightDateTime">Flight Date</label>
+                            <Field 
+                                type="text" 
+                                name="flightDateTime" 
+                                className="form-control" 
+                                id="flightDateTime" 
+                                placeholder="Use format YYYY-MM-DD hh:mm:ss"/>
+                                { errors.flightDateTime && touched.flightDateTime }
+                            <ErrorMessage
+                                component="div"
+                                name="flightDateTime"
+                                className="text-danger"
+                            />
+                        </div>
+                        <button className="btn btn-danger" type="submit">Save</button>
                     </Form>
                     )}
                 </Formik>
