@@ -27,7 +27,7 @@ export class AddShipment extends Component {
     
     render() {
         return (
-            <div>
+            <div className="add-form">
                 <h2 className="list-title">
                     <Link to="/" className="btn btn-secondary float-left">Back</Link>
                     Add New Shipment</h2>
@@ -114,7 +114,7 @@ export class AddShipment extends Component {
                                 className="text-danger"
                             />
                         </div>
-                        <button className="btn btn-danger" type="submit">Save</button>
+                        <button className="btn btn-success btn-lg" type="submit">Save</button>
                     </Form>
                     )}
                 </Formik>

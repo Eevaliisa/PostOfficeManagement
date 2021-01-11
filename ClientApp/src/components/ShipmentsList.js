@@ -10,7 +10,7 @@ export class ShipmentsList extends Component {
             shipmentId: '',
             shipments: []
         };   
-        this.handleClick = this.handleClick.bind(this); 
+        this.handleClick = this.handleClick.bind(this);
     }
 
     async componentDidMount() {
@@ -48,8 +48,9 @@ export class ShipmentsList extends Component {
             return(
             <div>
                 <h1 className="list-title">Shipments
-                    <Link to="/add-shipment" className="btn btn-danger btn-lg float-right" type="button">Add new shipment</Link>
+                    <Link to="/add-shipment" className="btn btn-success btn-lg float-right" type="button">Add new shipment</Link>
                 </h1>
+                <div id="shipments-table-div">
                 <table id="data-list" className="table data-list">
                     <thead>
                         <tr>
@@ -64,6 +65,7 @@ export class ShipmentsList extends Component {
                         {this.renderTableData()}
                     </tbody>
                  </table>
+                </div>
             </div>
 
                 ); 

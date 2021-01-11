@@ -114,10 +114,10 @@ export class GetBagList extends Component {
                 </h2>
                 <div className="align-content-center">
                 <Button disabled={ this.state.isFinalized } 
-                        className="btn btn-danger" 
+                        className="btn btn-success" 
                         onClick={() => this.handleAddLetterBagClick()}>Add New Bag of Letters</Button>
                 <Button disabled={ this.state.isFinalized } 
-                        className="btn btn-danger float-right"
+                        className="btn btn-success float-right"
                         onClick={() => this.handleAddParcelBagClick()}>Add New Bag of Parcels</Button>
                 </div>
                 <table className="table data-list">
@@ -136,7 +136,7 @@ export class GetBagList extends Component {
                         {this.renderParcelBagTableData()}
                     </tbody>
                  </table>
-                <Button className="btn btn-primary btn-lg" 
+                <Button className="btn btn-danger" 
                         onClick={this.handleFinalizeClick}
                         disabled={this.state.isFinalized}>Finalize Shipment</Button>
             </div>

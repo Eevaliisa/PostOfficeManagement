@@ -7,14 +7,14 @@ code {
   color: #E01A76;
 }
 
-.btn-primary {
+.btn-danger {
   color: #fff;
   background-color: #070d59;
   border-color: #1861ac;
   margin-bottom: 5%;
 }
 
-.btn-danger {
+.btn-success {
   color: #fff;
   background-color: #ee6f57;
   border-color: #ee6f57;
@@ -23,9 +23,9 @@ code {
   margin-right: auto;
 }
 
-.btn-danger:hover {
-  background-color: #eb593d;
-}
+/*.btn-danger:hover {*/
+/*  background-color: #eb593d;*/
+/*}*/
 
 .list-title {
     margin-top: 5%;
@@ -40,7 +40,7 @@ code {
   border-collapse: collapse;
   border: 3px solid #ddd;
   width: 100%;
-  margin-bottom: 2%;
+  margin-bottom: 2rem;
 }
 
 .data-list td, .data-list {
@@ -58,4 +58,14 @@ code {
   text-align: center;
   background-color: #1f3c88;
   color: white;
+}
+
+.add-form {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#shipments-table-div {
+  max-height: 500px;
+  overflow: auto;
 }
