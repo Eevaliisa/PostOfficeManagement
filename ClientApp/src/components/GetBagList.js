@@ -15,6 +15,8 @@ export class GetBagList extends Component {
         };
         this.handleParcelBagClick = this.handleParcelBagClick.bind(this);
         this.handleFinalizeClick = this.handleFinalizeClick.bind(this);
+        this.handleAddLetterBagClick = this.handleAddLetterBagClick.bind(this);
+        this.handleAddParcelBagClick = this.handleAddParcelBagClick.bind(this);
     }
     
     async getAllLetterBags() {
@@ -38,10 +40,18 @@ export class GetBagList extends Component {
         await this.getAllParcelBags();
     }
 
-    handleParcelBagClick(id){
+    handleParcelBagClick(id) {
         this.setState({ bagId: id });
         window.location.href = `/parcels-list?id=${id}`;
         console.log(id);
+    }
+    
+    handleAddLetterBagClick() {
+        window.location.href = `/add-letter-bag?id=${this.state.shipmentId}`;
+    }
+    
+    handleAddParcelBagClick() {
+        
     }
     
     handleFinalizeClick() {
@@ -100,11 +110,15 @@ export class GetBagList extends Component {
             <div>
                 <h2 className="list-title">
                     <Link to="/" className="btn btn-secondary float-left">Back</Link>
-                    Bags in shipment no {this.state.shipmentId}
+                    Bags in shipment no { this.state.shipmentId }
                 </h2>
                 <div className="align-content-center">
-                <Link to="" disabled={ this.state.isFinalized } className="btn btn-danger">Add New Bag of Letters</Link>
-                <Link to="" disabled={ this.state.isFinalized } className="btn btn-danger float-right">Add New Bag of Parcels</Link>
+                <Button disabled={ this.state.isFinalized } 
+                        className="btn btn-danger" 
+                        onClick={() => this.handleAddLetterBagClick()}>Add New Bag of Letters</Button>
+                <Button disabled={ this.state.isFinalized } 
+                        className="btn btn-danger float-right"
+                        onClick={() => this.handleAddParcelBagClick()}>Add New Bag of Parcels</Button>
                 </div>
                 <table className="table data-list">
                     <thead>

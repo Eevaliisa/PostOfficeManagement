@@ -7,6 +7,7 @@ import { GetBagList } from './components/GetBagList';
 import { GetParcelsList } from "./components/GetParcelsList";
 import './custom.css'
 import {AddParcel} from "./components/AddParcel";
+import {AddLetterBag} from "./components/AddLetterBag";
 
 
 export default class App extends Component {
@@ -20,6 +21,8 @@ export default class App extends Component {
         <Route path='/bags-list' component={GetBagList}/>
         <Route path='/parcels-list' component={GetParcelsList}/>
         <Route path='/add-parcel' component={AddParcel}/>
+        <Route path='/add-letter-bag' component={AddLetterBag}/>
+        
       </Layout>
     );
   }
