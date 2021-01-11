@@ -51,7 +51,7 @@ export class GetBagList extends Component {
     }
     
     handleAddParcelBagClick() {
-        
+        window.location.href = `/add-parcel-bag?id=${this.state.shipmentId}`;
     }
     
     handleFinalizeClick() {
