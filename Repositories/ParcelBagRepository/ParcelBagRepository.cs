@@ -17,12 +17,21 @@ namespace post_office_management.Repositories.ParcelBagRepository
             .ToListAsync();
         }
         
-        public override async Task<BagOfParcels> Add(BagOfParcels newBag){
-            var result = _context.Set<BagOfParcels>()
-                .AddIfNotExists<BagOfParcels>(newBag , x => x.BagId == newBag.BagId);
-            await _context.SaveChangesAsync();
+        public override async Task<BagOfParcels> Add(BagOfParcels newBag)
+        {
+           var existsInLetterBag = _context.BagOfLetters
+               .Where(c => c.BagId.ToUpper()
+                   .Equals(newBag.BagId.ToUpper())).ToList();
+           
+           if (!existsInLetterBag.Any())
+           { 
+               var result = _context.Set<BagOfParcels>()
+                   .AddIfNotExists<BagOfParcels>(newBag, x => x.BagId == newBag.BagId);
+               await _context.SaveChangesAsync();
 
-            return result?.Entity;
+               return result?.Entity;
+           }
+           return null;
         }
 
         public async Task<BagOfParcels> UpdateParcelsListInBag(string id)

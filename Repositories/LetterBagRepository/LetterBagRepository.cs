@@ -19,12 +19,21 @@ namespace post_office_management.Repositories.LetterBagRepository
             .ToListAsync();
         }
         
-        public override async Task<BagOfLetters> Add(BagOfLetters newBag){
-            var result = _context.Set<BagOfLetters>()
-                .AddIfNotExists<BagOfLetters>(newBag , x => x.BagId == newBag.BagId);
-            await _context.SaveChangesAsync();
+        public override async Task<BagOfLetters> Add(BagOfLetters newBag) {
+            var existsInParcelBag = _context.BagOfParcels
+                .Where(c => c.BagId.ToUpper()
+                    .Equals(newBag.BagId.ToUpper())).ToList();
+            if (!existsInParcelBag.Any())
+            {
 
-            return result?.Entity;
+                var result = _context.Set<BagOfLetters>()
+                    .AddIfNotExists<BagOfLetters>(newBag, x => x.BagId == newBag.BagId);
+                await _context.SaveChangesAsync();
+
+                return result?.Entity;
+            }
+
+            return null;
         }
     }
 
