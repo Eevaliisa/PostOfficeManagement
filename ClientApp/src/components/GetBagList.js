@@ -8,8 +8,9 @@ export class GetBagList extends Component {
         super(props);
         this.state = {
             isFetching: false,
-            isFinalized: false,
             shipmentId: new URLSearchParams(window.location.search).get('id'),
+            shipment: { },
+            isFinalized: false,
             letterBags: [],
             parcelBags: [],
         };
@@ -21,7 +22,7 @@ export class GetBagList extends Component {
     
     async getAllLetterBags() {
         console.log(this.state.shipmentId)
-        const result = await fetch(`http://localhost:5000/api/letterbag/${this.state.shipmentId}/bagList`);
+        const result = await fetch(`http://localhost:5000/api/letterbag/${ this.state.shipmentId }/bagList`);
         const letterBags = await result.json();
         this.setState({ letterBags, isFetching: false });
         console.log(result);
@@ -29,15 +30,22 @@ export class GetBagList extends Component {
     
     async getAllParcelBags() {
         console.log(this.state.shipmentId)
-        const result = await fetch(`http://localhost:5000/api/parcelbag/${this.state.shipmentId}/bagList`);
+        const result = await fetch(`http://localhost:5000/api/parcelbag/${ this.state.shipmentId }/bagList`);
         const parcelBags = await result.json();
         this.setState({ parcelBags, isFetching: false });
         console.log(result);
     }
     
+    async getShipment() {
+        const result = await fetch(`http://localhost:5000/api/shipment/${ this.state.shipmentId }`);
+        const shipment = await result.json();
+        this.setState({ shipment, isFinalized: shipment.isFinalized, isFetching: false });
+    }
+    
     async componentDidMount() {
         await this.getAllLetterBags();
         await this.getAllParcelBags();
+        await this.getShipment();
     }
 
     handleParcelBagClick(id) {
@@ -47,16 +55,16 @@ export class GetBagList extends Component {
     }
     
     handleAddLetterBagClick() {
-        window.location.href = `/add-letter-bag?id=${this.state.shipmentId}`;
+        window.location.href = `/add-letter-bag?id=${ this.state.shipmentId }`;
     }
     
     handleAddParcelBagClick() {
-        window.location.href = `/add-parcel-bag?id=${this.state.shipmentId}`;
+        window.location.href = `/add-parcel-bag?id=${ this.state.shipmentId }`;
     }
     
     handleFinalizeClick() {
         console.log(this.state.shipmentId)
-        fetch(`http://localhost:5000/api/shipment/${this.state.shipmentId}`, {
+        fetch(`http://localhost:5000/api/shipment/${ this.state.shipmentId }`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -66,7 +74,6 @@ export class GetBagList extends Component {
             console.log(response)
             return response.json()
         });
-        this.setState({ isFinalized: true});
     }
     
 
@@ -88,7 +95,7 @@ export class GetBagList extends Component {
     
     renderParcelBagTableData() {
         return this.state.parcelBags.map((parcelBag) => {
-            const {bagId, listOfParcels, destinationCountryCode, shipmentId } = parcelBag
+            const {bagId, destinationCountryCode, shipmentId } = parcelBag
             return (
                 <tr key={bagId} id={bagId} onClick={() => this.handleParcelBagClick(bagId)}>
                     <td>{bagId}</td>
@@ -113,7 +120,7 @@ export class GetBagList extends Component {
                     Bags in shipment no { this.state.shipmentId }
                 </h2>
                 <div className="align-content-center">
-                <Button disabled={ this.state.isFinalized } 
+                <Button disabled={ this.state.isFinalized }
                         className="btn btn-success" 
                         onClick={() => this.handleAddLetterBagClick()}>Add New Bag of Letters</Button>
                 <Button disabled={ this.state.isFinalized } 
@@ -138,7 +145,9 @@ export class GetBagList extends Component {
                  </table>
                 <Button className="btn btn-danger" 
                         onClick={this.handleFinalizeClick}
-                        disabled={this.state.isFinalized}>Finalize Shipment</Button>
+                        disabled={
+                            (this.state.letterBags.length === 0 && this.state.parcelBags.length === 0 )
+                        || this.state.isFinalized }>Finalize Shipment</Button>
             </div>
 
             ); 
