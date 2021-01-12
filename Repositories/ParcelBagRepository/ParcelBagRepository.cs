@@ -16,6 +16,14 @@ namespace post_office_management.Repositories.ParcelBagRepository
             .Where(c => c.ShipmentId.ToUpper().Equals(id.ToUpper()))
             .ToListAsync();
         }
+        
+        public override async Task<BagOfParcels> Add(BagOfParcels newBag){
+            var result = _context.Set<BagOfParcels>()
+                .AddIfNotExists<BagOfParcels>(newBag , x => x.BagId == newBag.BagId);
+            await _context.SaveChangesAsync();
+
+            return result?.Entity;
+        }
 
         public async Task<BagOfParcels> UpdateParcelsListInBag(string id)
         {

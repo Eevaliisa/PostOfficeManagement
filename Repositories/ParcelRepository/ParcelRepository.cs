@@ -36,20 +36,26 @@ namespace post_office_management.Repositories.ParcelRepository
             
             if (wrongBag.Any())
             {
-                throw new ArgumentException($"Cannot add parcel to letterbag");
-                
-            } else {
-            try
-            {
-                await _context.AddAsync(newParcel);
-                await _context.SaveChangesAsync();
+                throw new ArgumentException($"Cannot add parcel to bag of letters");
 
-                return newParcel;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{nameof(newParcel)} could not be saved: {ex.Message}");
-            }
+            } else { 
+                try
+                {
+                    var result = _context.Set<Parcel>()
+                        .AddIfNotExists<Parcel>(newParcel , x => x.ParcelId == newParcel.ParcelId);
+                    await _context.SaveChangesAsync();
+
+                    return result?.Entity;
+                    
+                    // await _context.AddAsync(newParcel);
+                    // await _context.SaveChangesAsync();
+                    //
+                    // return newParcel;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"{nameof(newParcel)} could not be saved: {ex.Message}");
+                }
             }
 
         }

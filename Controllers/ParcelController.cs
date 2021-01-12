@@ -47,7 +47,9 @@ namespace post_office_management.Controllers
     [ModelStateValidation]
     public async Task<ActionResult<Parcel>> AddParcel(Parcel newParcel)
     {
-        return Ok(await _parcelService.AddParcel(newParcel));
+        var result = await _parcelService.AddParcel(newParcel);
+            
+        return result == null ? Conflict("Parcel with given ID already exists in database") : Ok();
     }
 
     }

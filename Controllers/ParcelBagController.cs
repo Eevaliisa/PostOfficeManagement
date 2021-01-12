@@ -29,7 +29,9 @@ namespace post_office_management.Controllers
         [ModelStateValidation]
         public async Task<ActionResult> AddBagOfParcels(BagOfParcels newBag)
         {
-            return Ok(await _parcelBagService.AddBagOfParcels(newBag));
+            var result = await _parcelBagService.AddBagOfParcels(newBag);
+            
+            return result == null ? Conflict("Bag of Parcels with given ID already exists in database") : Ok();
         }
 
         [HttpPut]

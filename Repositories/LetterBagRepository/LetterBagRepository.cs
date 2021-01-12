@@ -18,6 +18,14 @@ namespace post_office_management.Repositories.LetterBagRepository
             .Equals(id.ToUpper()))
             .ToListAsync();
         }
+        
+        public override async Task<BagOfLetters> Add(BagOfLetters newBag){
+            var result = _context.Set<BagOfLetters>()
+                .AddIfNotExists<BagOfLetters>(newBag , x => x.BagId == newBag.BagId);
+            await _context.SaveChangesAsync();
+
+            return result?.Entity;
+        }
     }
 
     

@@ -29,7 +29,10 @@ namespace post_office_management.Controllers
         [ModelStateValidation]
         public async Task<ActionResult> AddBagOfLetters(BagOfLetters newBag)
         {
-            return Ok(await _letterBagService.AddBagOfLetters(newBag));
+            var result = await _letterBagService.AddBagOfLetters(newBag);
+            
+            return result == null ? Conflict("Bag of letters with given ID already exists in database") : Ok();
+            //return Ok(await _letterBagService.AddBagOfLetters(newBag));
         }
 
 

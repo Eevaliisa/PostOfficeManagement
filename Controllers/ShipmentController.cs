@@ -53,7 +53,7 @@ namespace post_office_management.Controllers
         {
             var result = await _shipmentService.AddShipment(newShipment);
             
-            return result == null ? Conflict("Shipment with given ID already exists in database") : Ok("New shipment added");
+            return result == null ? Conflict("Shipment with given ID already exists in database") : Ok();
         }
     }
 }
