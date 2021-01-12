@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from "yup";
-import {Link} from "react-router-dom";
+import {Button} from "reactstrap";
 
 const AddParcelBagSchema = Yup.object().shape({
 
@@ -27,11 +27,18 @@ export class AddParcelBag extends Component {
         };
     }
 
+    handleBackButton = () => {
+        const { history } = this.props;
+        history.goBack();
+    }
+
     render() {
         return (
             <div className="add-form">
                 <h2 className="list-title">
-                    <Link to="/" className="btn btn-secondary float-left">Back</Link>
+                    <Button className="btn btn-secondary float-left" onClick={this.handleBackButton}>
+                        Back
+                    </Button>
                     Add new bag of parcels to shipment no {this.state.shipmentId}</h2>
 
                 <Formik

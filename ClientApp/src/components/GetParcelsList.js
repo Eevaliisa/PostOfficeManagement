@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import {Link} from "react-router-dom";
 import {Button} from "reactstrap";
 
 export class GetParcelsList extends Component {
@@ -23,29 +22,34 @@ export class GetParcelsList extends Component {
     
     async componentDidMount() {
         console.log(this.state.bagId)
-        const result = await fetch(`http://localhost:5000/api/parcel/${this.state.bagId}/parcels`);
+        const result = await fetch(`http://localhost:5000/api/parcel/${ this.state.bagId }/parcels`);
         const parcelsList = await result.json();
         this.setState({ parcelsList, isFetching:false });
         console.log(result);
     }
     handleClick(){
-        window.location.href = `/add-parcel?id=${this.state.bagId}`;
+        window.location.href = `/add-parcel?id=${ this.state.bagId }`;
     }
 
     renderParcelTableData() {
         return this.state.parcelsList.map((parcel) => {
             const {parcelId, recipientName, destinationCountryCode, weightInKg, price } = parcel
             return (
-                <tr key={parcelId}>
-                    <td>{parcelId}</td>
-                    <td>{recipientName}</td>
-                    <td>{weightInKg}</td>
-                    <td>{price}</td>
-                    <td>{destinationCountryCode}</td>
-                    <td>{this.state.bagId}</td>
+                <tr key={ parcelId }>
+                    <td>{ parcelId }</td>
+                    <td>{ recipientName }</td>
+                    <td>{ weightInKg }</td>
+                    <td>{ price }</td>
+                    <td>{ destinationCountryCode }</td>
+                    <td>{ this.state.bagId }</td>
                 </tr>
             )
         })
+    }
+
+    handleBackButtonClick = () => {
+        const { history } = this.props;
+        history.goBack();
     }
 
     render() {
@@ -55,9 +59,13 @@ export class GetParcelsList extends Component {
             return(
                 <div>
                     <h2 className="list-title">
-                        <Link to="/" className="btn btn-secondary float-left">Back</Link>
+                        <Button className="btn btn-secondary float-left" onClick={ this.handleBackButtonClick }>
+                            Back
+                        </Button>
                         Parcels in bag no {this.state.bagId}
-                        <Button className="btn btn-success float-right" onClick={() => this.handleClick()}>Add New Parcel</Button>
+                        <Button className="btn btn-success float-right" onClick={ () => this.handleClick() }>
+                            Add New Parcel
+                        </Button>
                     </h2>
                     <table className="table data-list">
                         <thead>
