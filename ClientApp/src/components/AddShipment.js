@@ -24,10 +24,19 @@ const AddShipmentSchema = Yup.object().shape({
 });
 
 export class AddShipment extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+           showSuccess: false,
+           showError: false, 
+        };
+    }
     
     render() {
         return (
             <div className="add-form">
+                
                 <h2 className="list-title">
                     <Link to="/" className="btn btn-secondary float-left">Back</Link>
                     Add New Shipment</h2>
@@ -40,14 +49,20 @@ export class AddShipment extends Component {
                         flightDateTime: ""}}
                     validationSchema={AddShipmentSchema}
                     onSubmit={(values, { setSubmitting }) => {
-                        fetch('http://localhost:5000/api/shipment', {
-                            method: 'POST',
+                        fetch("http://localhost:5000/api/shipment", {
+                            method: "POST",
                             headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
                             },
                             body: JSON.stringify(values)
                             }).then((response) => {
+                                if (response.status === 200) {
+                                    this.setState({ showSuccess: true });
+                                } 
+                                if (response.status === 409) {
+                                    this.setState( { showError: true });
+                                }
                                 console.log(response)
                                 return response.json();
                             });
@@ -55,7 +70,7 @@ export class AddShipment extends Component {
                      setSubmitting(false);
                     }}
                 >
-                {({ errors, touched }) => (
+                {({ errors, touched, isSubmitting, resetForm }) => (
                     <Form>
                         <div className="form-group">
                             <label htmlFor="shipmentId">Shipment ID</label>
@@ -114,7 +129,24 @@ export class AddShipment extends Component {
                                 className="text-danger"
                             />
                         </div>
-                        <button className="btn btn-success btn-lg" type="submit">Save</button>
+                        { this.state.showSuccess &&
+                            resetForm &&
+                        setTimeout(() => this.setState({ showSuccess: false }),5000) &&
+                        <div className="alert alert-success" >
+                            New shipment successfully added!
+                        </div> }
+                        { this.state.showError &&
+                        setTimeout(() => this.setState({ showError: false }),5000) &&
+                        <div className="alert alert-danger">
+                            Shipment with this ID already exists!
+                        </div>}
+                        
+                        <button className="btn btn-success btn-lg" type="submit" disabled={ isSubmitting }>
+                            Save
+                        </button>
+                        <button className="btn btn-secondary float-right" type="reset" onClick={ resetForm }>
+                            Reset
+                        </button>
                     </Form>
                     )}
                 </Formik>
