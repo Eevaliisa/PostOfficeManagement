@@ -134,7 +134,7 @@ export class GetBagList extends Component {
                             <th scope="col">Type of Bag</th>
                             <th scope="col">Total Price</th>
                             <th scope="col">Letters Count</th>
-                            <th scope="col">Destination Country Code</th>
+                            <th scope="col">Destination Country</th>
                             <th scope="col">Shipment ID</th>
                         </tr>
                     </thead>

@@ -46,6 +46,7 @@ code {
   border: 3px solid #ddd;
   width: 100%;
   margin-bottom: 2rem;
+  table-layout: fixed;
 }
 
 .data-list td, .data-list {

@@ -57,7 +57,7 @@ export class GetParcelsList extends Component {
                     <h2 className="list-title">
                         <Link to="/" className="btn btn-secondary float-left">Back</Link>
                         Parcels in bag no {this.state.bagId}
-                        <Button className="btn btn-danger float-right" onClick={() => this.handleClick()}>Add New Parcel</Button>
+                        <Button className="btn btn-success float-right" onClick={() => this.handleClick()}>Add New Parcel</Button>
                     </h2>
                     <table className="table data-list">
                         <thead>
@@ -66,7 +66,7 @@ export class GetParcelsList extends Component {
                             <th scope="col">Recipient's Name</th>
                             <th scope="col">Weight in KG</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Destination Country Code</th>
+                            <th scope="col">Destination Country</th>
                             <th scope="col">Bag Id</th>
                         </tr>
                         </thead>

@@ -11,6 +11,8 @@ export class ShipmentsList extends Component {
             shipments: []
         };   
         this.handleClick = this.handleClick.bind(this);
+        this.formatDate = this.formatDate.bind(this);
+        this.formatBoolean = this.formatBoolean.bind(this);
     }
 
     async componentDidMount() {
@@ -25,6 +27,13 @@ export class ShipmentsList extends Component {
         window.location.href = `/bags-list?id=${id}`;
         console.log(id);
     }
+    formatDate(date) {
+        return new Date(date).toLocaleString('en-GB');
+    }
+    
+    formatBoolean(isFinalized) {
+         return isFinalized ? 'Yes' : 'No';
+    }
 
     renderTableData() {
         return this.state.shipments.map((shipment, index) => {
@@ -34,8 +43,8 @@ export class ShipmentsList extends Component {
                     <td>{shipmentId}</td>
                     <td>{destinationAirport}</td>
                     <td>{flightNumber}</td>
-                    <td>{flightDateTime}</td>
-                    <td>{String(isFinalized)}</td>
+                    <td>{this.formatDate(flightDateTime)}</td>
+                    <td>{this.formatBoolean(isFinalized)}</td>
                 </tr>
             )
         })
