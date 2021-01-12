@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 
 export class GetParcelsList extends Component {
 
@@ -33,7 +33,12 @@ export class GetParcelsList extends Component {
 
     renderParcelTableData() {
         return this.state.parcelsList.map((parcel) => {
-            const {parcelId, recipientName, destinationCountryCode, weightInKg, price } = parcel
+            const { 
+                parcelId, 
+                recipientName, 
+                destinationCountryCode, 
+                weightInKg, 
+                price } = parcel
             return (
                 <tr key={ parcelId }>
                     <td>{ parcelId }</td>
@@ -62,7 +67,7 @@ export class GetParcelsList extends Component {
                         <Button className="btn btn-secondary float-left" onClick={ this.handleBackButtonClick }>
                             Back
                         </Button>
-                        Parcels in bag no {this.state.bagId}
+                        Parcels in bag no { this.state.bagId }
                         <Button className="btn btn-success float-right" onClick={ () => this.handleClick() }>
                             Add New Parcel
                         </Button>
@@ -79,7 +84,7 @@ export class GetParcelsList extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.renderParcelTableData()}
+                        { this.renderParcelTableData() }
                         <tr>
                             <th scope="col">Total number of parcels:</th>
                             <th scope="col">{ this.state.parcelsList.length }</th>

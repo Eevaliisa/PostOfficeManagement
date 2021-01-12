@@ -17,7 +17,7 @@ export class ShipmentsList extends Component {
 
     async componentDidMount() {
         this.setState({ isFetching: true})
-        const result = await fetch('http://localhost:5000/api/shipment');
+        const result = await fetch("http://localhost:5000/api/shipment");
         const shipments = await result.json();
         this.setState({ shipments, isFetching: false });
     }
@@ -28,23 +28,28 @@ export class ShipmentsList extends Component {
         console.log(id);
     }
     formatDate(date) {
-        return new Date(date).toLocaleString('en-GB');
+        return new Date(date).toLocaleString("en-GB");
     }
     
     formatBoolean(isFinalized) {
-         return isFinalized ? 'Yes' : 'No';
+         return isFinalized ? "Yes" : "No";
     }
 
     renderTableData() {
         return this.state.shipments.map((shipment, index) => {
-            const {shipmentId, destinationAirport, flightNumber, flightDateTime, isFinalized } = shipment
+            const {
+                shipmentId, 
+                destinationAirport, 
+                flightNumber, 
+                flightDateTime, 
+                isFinalized } = shipment
             return (
-                <tr key={shipmentId} id={shipmentId} onClick={() => this.handleClick(shipmentId)}>
-                    <td>{shipmentId}</td>
-                    <td>{destinationAirport}</td>
-                    <td>{flightNumber}</td>
-                    <td>{this.formatDate(flightDateTime)}</td>
-                    <td>{this.formatBoolean(isFinalized)}</td>
+                <tr key={ shipmentId } id={ shipmentId } onClick={() => this.handleClick(shipmentId)}>
+                    <td>{ shipmentId }</td>
+                    <td>{ destinationAirport }</td>
+                    <td>{ flightNumber }</td>
+                    <td>{ this.formatDate(flightDateTime) }</td>
+                    <td>{ this.formatBoolean(isFinalized) }</td>
                 </tr>
             )
         })
@@ -57,7 +62,9 @@ export class ShipmentsList extends Component {
             return(
             <div>
                 <h1 className="list-title">Shipments
-                    <Link to="/add-shipment" className="btn btn-success btn-lg float-right" type="button">Add new shipment</Link>
+                    <Link to="/add-shipment" className="btn btn-success btn-lg float-right" type="button">
+                        Add new shipment
+                    </Link>
                 </h1>
                 <div id="shipments-table-div">
                 <table id="data-list" className="table data-list">

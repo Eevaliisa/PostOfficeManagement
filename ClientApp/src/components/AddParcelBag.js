@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 
 const AddParcelBagSchema = Yup.object().shape({
 
@@ -21,7 +21,7 @@ export class AddParcelBag extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shipmentId: new URLSearchParams(window.location.search).get('id'),
+            shipmentId: new URLSearchParams(window.location.search).get("id"),
             showSuccess: false,
             showError: false,
         };
@@ -36,10 +36,10 @@ export class AddParcelBag extends Component {
         return (
             <div className="add-form">
                 <h2 className="list-title">
-                    <Button className="btn btn-secondary float-left" onClick={this.handleBackButton}>
+                    <Button className="btn btn-secondary float-left" onClick={ this.handleBackButton }>
                         Back
                     </Button>
-                    Add new bag of parcels to shipment no {this.state.shipmentId}</h2>
+                    Add new bag of parcels to shipment no { this.state.shipmentId }</h2>
 
                 <Formik
                     initialValues={{
@@ -48,11 +48,11 @@ export class AddParcelBag extends Component {
                         shipmentId: this.state.shipmentId }}
                     validationSchema={AddParcelBagSchema}
                     onSubmit={(values, { setSubmitting }) => {
-                        fetch('http://localhost:5000/api/parcelbag', {
-                            method: 'POST',
+                        fetch("http://localhost:5000/api/parcelbag", {
+                            method: "POST",
                             headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
                             },
                             body: JSON.stringify(values)
                         }).then((response) => {

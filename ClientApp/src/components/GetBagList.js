@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
-import {Button} from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 export class GetBagList extends Component {
 
@@ -8,7 +8,7 @@ export class GetBagList extends Component {
         super(props);
         this.state = {
             isFetching: false,
-            shipmentId: new URLSearchParams(window.location.search).get('id'),
+            shipmentId: new URLSearchParams(window.location.search).get("id"),
             shipment: { },
             isFinalized: false,
             letterBags: [],
@@ -65,10 +65,10 @@ export class GetBagList extends Component {
     handleFinalizeClick() {
         console.log(this.state.shipmentId)
         fetch(`http://localhost:5000/api/shipment/${ this.state.shipmentId }`, {
-            method: 'PUT',
+            method: "PUT",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             },
         }).then((response) => {
             console.log(response)
@@ -79,15 +79,20 @@ export class GetBagList extends Component {
 
     renderLetterBagTableData() {
         return this.state.letterBags.map((letterBag) => {
-            const {bagId, totalPrice, lettersCount, destinationCountryCode, shipmentId } = letterBag
+            const {
+                bagId, 
+                totalPrice, 
+                lettersCount, 
+                destinationCountryCode, 
+                shipmentId } = letterBag
             return (
-                <tr key={bagId}>
-                    <td>{bagId}</td>
+                <tr key={ bagId }>
+                    <td>{ bagId }</td>
                     <td>Bag of Letters</td>
-                    <td>{totalPrice}</td>
-                    <td>{lettersCount}</td>
-                    <td>{destinationCountryCode}</td>
-                    <td>{shipmentId}</td>
+                    <td>{ totalPrice }</td>
+                    <td>{ lettersCount }</td>
+                    <td>{ destinationCountryCode }</td>
+                    <td>{ shipmentId }</td>
                 </tr>
             )
         })
@@ -95,15 +100,15 @@ export class GetBagList extends Component {
     
     renderParcelBagTableData() {
         return this.state.parcelBags.map((parcelBag) => {
-            const {bagId, destinationCountryCode, shipmentId } = parcelBag
+            const { bagId, destinationCountryCode, shipmentId } = parcelBag
             return (
-                <tr key={bagId} id={bagId} onClick={() => this.handleParcelBagClick(bagId)}>
-                    <td>{bagId}</td>
+                <tr key={ bagId } id={ bagId } onClick={() => this.handleParcelBagClick(bagId)}>
+                    <td>{ bagId }</td>
                     <td>Bag of Parcels</td>
                     <td>Click to see list of parcels</td>
                     <td>0</td>
-                    <td>{destinationCountryCode}</td>
-                    <td>{shipmentId}</td>
+                    <td>{ destinationCountryCode }</td>
+                    <td>{ shipmentId }</td>
                 </tr>
             )
         })
@@ -149,7 +154,6 @@ export class GetBagList extends Component {
                             (this.state.letterBags.length === 0 && this.state.parcelBags.length === 0 )
                         || this.state.isFinalized }>Finalize Shipment</Button>
             </div>
-
             ); 
             }
          }

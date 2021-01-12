@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AddShipmentSchema = Yup.object().shape({
 
@@ -38,7 +38,9 @@ export class AddShipment extends Component {
             <div className="add-form">
                 
                 <h2 className="list-title">
-                    <Link to="/" className="btn btn-secondary float-left">Back</Link>
+                    <Link to="/" className="btn btn-secondary float-left">
+                        Back
+                    </Link>
                     Add New Shipment</h2>
 
                 <Formik
