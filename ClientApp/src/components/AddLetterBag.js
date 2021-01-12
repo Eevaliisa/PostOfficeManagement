@@ -176,7 +176,8 @@ export class AddLetterBag extends Component {
                                 Bag with given ID already exists! Please choose new value for ID.
                             </div>}
                             
-                            <button className="btn btn-success btn-lg" type="submit" disabled={ isSubmitting }>
+                            <button className="btn btn-success btn-lg" type="submit" 
+                                    disabled={ isSubmitting || this.state.shipmentId === null }>
                                 Save
                             </button>
                             <button className="btn btn-secondary float-right" type="reset" onClick={ resetForm }>
