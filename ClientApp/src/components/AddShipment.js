@@ -64,13 +64,15 @@ export class AddShipment extends Component {
                                     this.setState( { showError: true });
                                 }
                                 console.log(response)
-                                return response.json();
                             });
                         
                      setSubmitting(false);
                     }}
                 >
-                {({ errors, touched, isSubmitting, resetForm }) => (
+                    {({ errors, 
+                      touched, 
+                      isSubmitting, 
+                      resetForm }) => (
                     <Form>
                         <div className="form-group">
                             <label htmlFor="shipmentId">Shipment ID</label>
@@ -138,7 +140,7 @@ export class AddShipment extends Component {
                         { this.state.showError &&
                         setTimeout(() => this.setState({ showError: false }),5000) &&
                         <div className="alert alert-danger">
-                            Shipment with this ID already exists!
+                            Shipment with given ID already exists! Please choose new value for ID.
                         </div>}
                         
                         <button className="btn btn-success btn-lg" type="submit" disabled={ isSubmitting }>

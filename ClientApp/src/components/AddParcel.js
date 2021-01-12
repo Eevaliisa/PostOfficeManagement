@@ -29,7 +29,9 @@ export class AddParcel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bagId: new URLSearchParams(window.location.search).get('id')
+            bagId: new URLSearchParams(window.location.search).get('id'),
+            showSuccess: false,
+            showError: false,
         };
     }
 
@@ -58,14 +60,22 @@ export class AddParcel extends Component {
                             },
                             body: JSON.stringify(values)
                         }).then((response) => {
-                            console.log(response)
-                            return response.json();
+                            if (response.status === 200) {
+                                this.setState({ showSuccess: true });
+                            }
+                            if (response.status === 409) {
+                                this.setState( { showError: true });
+                            }
+                            console.log(response);
                         });
                         
                         setSubmitting(false);
                     }}
                 >
-                    {({ errors, touched }) => (
+                        {({ errors, 
+                          touched, 
+                          isSubmitting, 
+                          resetForm }) => (
                         <Form>
                             <div className="form-group">
                                 <label htmlFor="parcelId">Parcel ID</label>
@@ -143,7 +153,25 @@ export class AddParcel extends Component {
                                     className="form-control"
                                     id="bagId"/>
                             </div>
-                            <button className="btn btn-success btn-lg" type="submit">Save</button>
+
+                            { this.state.showSuccess &&
+                            resetForm &&
+                            setTimeout(() => this.setState({ showSuccess: false }),5000) &&
+                            <div className="alert alert-success" >
+                                New parcel successfully added!
+                            </div> }
+                            { this.state.showError &&
+                            setTimeout(() => this.setState({ showError: false }),5000) &&
+                            <div className="alert alert-danger">
+                                Parcel with given ID already exists! Please choose new value for ID.
+                            </div>}
+                            
+                            <button className="btn btn-success btn-lg" type="submit" disabled={ isSubmitting }>
+                                Save
+                            </button>
+                            <button className="btn btn-secondary float-right" type="reset" onClick={ resetForm }>
+                                Reset
+                            </button>
                         </Form>
                     )}
                 </Formik>

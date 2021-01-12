@@ -64,6 +64,8 @@ code {
   text-align: center;
   background-color: #1f3c88;
   color: white;
+  position: sticky;
+  top: 0;
 }
 
 .add-form {
