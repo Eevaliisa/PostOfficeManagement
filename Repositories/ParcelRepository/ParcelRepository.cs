@@ -46,11 +46,6 @@ namespace post_office_management.Repositories.ParcelRepository
                     await _context.SaveChangesAsync();
 
                     return result?.Entity;
-                    
-                    // await _context.AddAsync(newParcel);
-                    // await _context.SaveChangesAsync();
-                    //
-                    // return newParcel;
                 }
                 catch (Exception ex)
                 {
