@@ -14,6 +14,7 @@ const AddParcelSchema = Yup.object().shape({
         .required("Recipient's name is required."),
     weightInKg: Yup.number()
         .positive("Weight cannot be less than 0.")
+        .max(99, "Weight must be less than 100 kg")
         .required("Weight is required."),
     price: Yup.number()
         .positive("Price cannot be less than 0.")
@@ -110,7 +111,7 @@ export class AddParcel extends Component {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="weightInKg">Parcel weight in Kg</label>
+                                <label htmlFor="weightInKg">Parcel weight in kg</label>
                                 <Field
                                     type="text"
                                     name="weightInKg"
