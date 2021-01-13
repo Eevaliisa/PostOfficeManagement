@@ -26,14 +26,14 @@ Project is created with:
 	
 ## Setup
 To run this project:
-First install .NET CORE SDK.
+First install .NET CORE SDK [You can download it here](https://dotnet.microsoft.com/download). You may need to restart your computer after installation.
 Then install SQL server Express version [You can download it here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 After installation copy and save the given connetcion string and check if it matches the one in "appsettings.json", leave database name as it is.
 
 In main project folder (post-office-management) directory, run the commands:
 - `dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.1`
-- `dotnet tool --global dotnet-ef`
-- `dotnet add package Microsoft.EntityFrameworkCore.Design`
+- `dotnet tool install --global dotnet-ef --version 5.0.1`
+- `dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.1`
 - And for applying migrations run: `dotnet ef database update`
 
 - Now move to ClientApp directory: `cd ClientApp`
@@ -42,7 +42,10 @@ In main project folder (post-office-management) directory, run the commands:
 Then in main project folder run command: `dotnet run`
 In ClientApp directory run: `npm start`
 
-Now you can access the app at http://localhost:5000/
+You can now access the app at http://localhost:5000/
+
+Database is seeded with a small amount of example data. Happy exploring!
 
 ## Project status
 Work in progress!
+
