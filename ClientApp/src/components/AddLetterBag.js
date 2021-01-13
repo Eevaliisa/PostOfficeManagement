@@ -77,7 +77,6 @@ export class AddLetterBag extends Component {
                             if (response.status === 409) {
                                 this.setState( { showError: true });
                             }
-                             console.log(response);
                         });
 
                         setSubmitting(false);

@@ -21,12 +21,11 @@ export class GetParcelsList extends Component {
     }
     
     async componentDidMount() {
-        console.log(this.state.bagId)
         const result = await fetch(`http://localhost:5000/api/parcel/${ this.state.bagId }/parcels`);
         const parcelsList = await result.json();
         this.setState({ parcelsList, isFetching:false });
-        console.log(result);
     }
+    
     handleClick(){
         window.location.href = `/add-parcel?id=${ this.state.bagId }`;
     }

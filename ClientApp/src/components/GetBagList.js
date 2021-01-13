@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Button } from "reactstrap";
 
 export class GetBagList extends Component {
@@ -11,6 +11,7 @@ export class GetBagList extends Component {
             shipmentId: new URLSearchParams(window.location.search).get("id"),
             shipment: { },
             isFinalized: false,
+            showSuccess: false,
             letterBags: [],
             parcelBags: [],
         };
@@ -21,19 +22,15 @@ export class GetBagList extends Component {
     }
     
     async getAllLetterBags() {
-        console.log(this.state.shipmentId)
         const result = await fetch(`http://localhost:5000/api/letterbag/${ this.state.shipmentId }/bagList`);
         const letterBags = await result.json();
         this.setState({ letterBags, isFetching: false });
-        console.log(result);
     }
     
     async getAllParcelBags() {
-        console.log(this.state.shipmentId)
         const result = await fetch(`http://localhost:5000/api/parcelbag/${ this.state.shipmentId }/bagList`);
         const parcelBags = await result.json();
         this.setState({ parcelBags, isFetching: false });
-        console.log(result);
     }
     
     async getShipment() {
@@ -51,7 +48,6 @@ export class GetBagList extends Component {
     handleParcelBagClick(id) {
         this.setState({ bagId: id });
         window.location.href = `/parcels-list?id=${id}`;
-        console.log(id);
     }
     
     handleAddLetterBagClick() {
@@ -63,7 +59,6 @@ export class GetBagList extends Component {
     }
     
     handleFinalizeClick() {
-        console.log(this.state.shipmentId)
         fetch(`http://localhost:5000/api/shipment/${ this.state.shipmentId }`, {
             method: "PUT",
             headers: {
@@ -71,12 +66,13 @@ export class GetBagList extends Component {
                 "Content-Type": "application/json"
             },
         }).then((response) => {
-            console.log(response)
-            return response.json()
+            if (response.status === 200) {
+                this.setState({ showSuccess: true });
+            }
         });
+        
     }
     
-
     renderLetterBagTableData() {
         return this.state.letterBags.map((letterBag) => {
             const {
@@ -148,6 +144,11 @@ export class GetBagList extends Component {
                         {this.renderParcelBagTableData()}
                     </tbody>
                  </table>
+                { this.state.showSuccess &&
+                setTimeout(() => this.setState({ showSuccess: false }),5000) &&
+                <div className="alert alert-success" >
+                    Success! Shipment finalized!
+                </div> }
                 <Button className="btn btn-danger" 
                         onClick={this.handleFinalizeClick}
                         disabled={

@@ -25,7 +25,6 @@ export class ShipmentsList extends Component {
     handleClick(id){
         this.setState({ shipmentId: id });
         window.location.href = `/bags-list?id=${id}`;
-        console.log(id);
     }
     formatDate(date) {
         return new Date(date).toLocaleString("en-GB");
